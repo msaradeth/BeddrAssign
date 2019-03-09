@@ -15,22 +15,28 @@ public enum BtState {
     case failToConnect
     case disconnected
     case disconnecting
+    case poweredOn
+    case poweredOff
     case unknown
     
     func description() -> String {
         switch self {
         case .connected:
-            return "Connected"
+            return "Bluetooth: connected"
         case .connecting:
-            return "Connecting"
+            return "Bluetooth: connecting"
         case .failToConnect:
-            return "Fail To Connect"
+            return "Bluetooth: fail to connect"
         case .disconnected:
-            return "Disconnected"
+            return "Bluetooth: disconnected"
         case .disconnecting:
-            return "Disconnecting"
+            return "Bluetooth: disconnecting"
+        case .poweredOn:
+            return "Bluetooth: poweredOn"
+        case .poweredOff:
+            return "Bluetooth: poweredOff"
         default:
-            return "Not Connected To Bluetooth"
+            return ""
         }
     }
 }

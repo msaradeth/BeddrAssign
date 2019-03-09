@@ -17,8 +17,10 @@ class ListDeviceHeaderVC: UIViewController {
     
     static func createWith(title: String, viewModel: ListViewModel) -> ListDeviceHeaderVC {
         let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "ListDeviceHeaderVC") as! ListDeviceHeaderVC
-        vc.navigationItem.title = title
         vc.viewModel = viewModel
+        DispatchQueue.main.async {
+            vc.navigationItem.title = title
+        }
         return vc
     }
     

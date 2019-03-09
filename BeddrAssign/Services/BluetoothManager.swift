@@ -15,7 +15,7 @@ import RxSwift
 class BluetoothManager: NSObject {
     static let shared = BluetoothManager()
     
-    public var subjectBtState: BehaviorSubject<BtState> = BehaviorSubject<BtState>(value: BtState.unknown)
+    public var subjectBtState: BehaviorSubject<BtState>!
     public var observable: Observable<BtState> {
         return subjectBtState.asObservable()
     }
@@ -41,11 +41,15 @@ class BluetoothManager: NSObject {
     
     override init() {
         btStatus = .unknown
-//        subjectBtState = BehaviorSubject<BtState>(value: BtState.unknown)
+        subjectBtState = BehaviorSubject<BtState>(value: btStatus)
         
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: true)])
-//        centralManager = CBCentralManager(delegate: self, queue: nil)
+        if let centralManager = centralManager, centralManager.state == .poweredOn {
+            btStatus = .poweredOn
+        }else {
+            btStatus = .poweredOff
+        }
     }
     
     
@@ -119,8 +123,10 @@ extension BluetoothManager: CBCentralManagerDelegate {
         
         switch central.state {
         case .poweredOn:
+            btStatus = .poweredOn
             scanForPeripherals()
-            
+        case .poweredOff:
+            btStatus = .poweredOff
         default:
             _ = "central.state is default - do nothing at this time."
         }
@@ -131,7 +137,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // we can only move forwards when we know the connection
     // to the peripheral succeeded
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        updateBtState(btStatus: .connected)
+        btStatus = .connected
         
         // look for services of interest on peripheral
         peripheralInstance?.discoverServices([serviceUUID])
@@ -141,21 +147,19 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // discover what peripheral devices OF INTEREST
     // are available for this app to connect to
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        updateBtState(btStatus: .disconnected)
+        btStatus = .disconnected
         
         //start scanning
         centralManager?.scanForPeripherals(withServices: [serviceUUID])
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        updateBtState(btStatus: .failToConnect)
+        btStatus = .failToConnect
     }
     
     // discover what peripheral devices OF INTEREST
     // are available for this app to connect to
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        updateLog(txt: "didDiscover peripheral")
-        
         // store a reference to the peripheral in
         // class instance variable
         peripheralInstance = peripheral
@@ -177,8 +181,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
 extension BluetoothManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        updateLog(txt: "didDiscoverServices")
-        
         for service in peripheral.services! {
             if service.uuid == serviceUUID {
                 print("Service: \(service)")
@@ -194,8 +196,6 @@ extension BluetoothManager: CBPeripheralDelegate {
     // confirm we've discovered characteristics
     // of interest within services of interest
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        updateLog(txt: "didDiscoverCharacteristicsFor")
-        
         for characteristic in service.characteristics! {
             print(characteristic)
             if characteristic.uuid == characteristicUUID {
@@ -222,8 +222,6 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     // MARK: Handle Bluetooth Reponses
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        updateLog(txt: "didUpdateValueFor characteristic")
-        
         //convert data to array of [UInt8]
         var bytesData = [UInt8] (repeating: 0, count: characteristic.value!.count)
         (characteristic.value! as NSData).getBytes(&bytesData, length: characteristic.value!.count)
@@ -232,32 +230,8 @@ extension BluetoothManager: CBPeripheralDelegate {
         if let packetDataAscii = String(bytes: bytesData, encoding: String.Encoding.ascii) {
             inBufferAscii.append(packetDataAscii)
         }
-        
-    }
-    
-    
-    // we're notified whenever a characteristic
-    // value updates regularly or posts once; read and
-    // decipher the characteristic value(s) that we've
-    // subscribed to
-    
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
-        updateLog(txt: "didUpdateValueFor descriptor")
     }
 }
 
 
-
-//MARK: - Helper functions
-extension BluetoothManager {
-    
-    func updateBtState(btStatus: BtState) {
-        subjectBtState.onNext(btStatus)
-    }
-    
-    func updateLog(txt: String) {
-        logArr.append(txt)
-    }
-
-}
 

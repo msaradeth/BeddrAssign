@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		23EB1B686636802EC22AC891 /* Pods_BeddrAssign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030F5E1D576728B607A490A8 /* Pods_BeddrAssign.framework */; };
 		5E3FE1BD22340E3A00B2537F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */; };
-		5E3FE1C222340E3A00B2537F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C022340E3A00B2537F /* Main.storyboard */; };
 		5E3FE1C422340E3C00B2537F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C322340E3C00B2537F /* Assets.xcassets */; };
 		5E3FE1C722340E3C00B2537F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */; };
 		5E3FE1D222340E3C00B2537F /* BeddrAssignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1D122340E3C00B2537F /* BeddrAssignTests.swift */; };
@@ -49,7 +48,6 @@
 		030F5E1D576728B607A490A8 /* Pods_BeddrAssign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeddrAssign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3FE1B922340E3A00B2537F /* BeddrAssign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeddrAssign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5E3FE1C122340E3A00B2537F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E3FE1C322340E3C00B2537F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E3FE1C622340E3C00B2537F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E3FE1C822340E3C00B2537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,9 +138,7 @@
 				5E3FE1ED22340F0D00B2537F /* Services */,
 				5E3FE20722341A1E00B2537F /* Extentions */,
 				5E3FE1EC22340EEC00B2537F /* Common */,
-				5E3FE1C022340E3A00B2537F /* Main.storyboard */,
 				5E3FE1C322340E3C00B2537F /* Assets.xcassets */,
-				5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */,
 				5E3FE1C822340E3C00B2537F /* Info.plist */,
 			);
 			path = BeddrAssign;
@@ -171,6 +167,7 @@
 			children = (
 				5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */,
 				5E3FE1EE22340F9800B2537F /* MainNavCntrl.swift */,
+				5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -363,7 +360,6 @@
 				5E3FE1C722340E3C00B2537F /* LaunchScreen.storyboard in Resources */,
 				5E3FE1C422340E3C00B2537F /* Assets.xcassets in Resources */,
 				5E3FE204223415BB00B2537F /* BeddrDevices.storyboard in Resources */,
-				5E3FE1C222340E3A00B2537F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,14 +476,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5E3FE1C022340E3A00B2537F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5E3FE1C122340E3A00B2537F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
