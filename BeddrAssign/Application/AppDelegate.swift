@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Setup First ViewController
+        //Setup App Entry Point
         let items = [DeviceHeader(shortName: "Mike", fullName: "Saradeth"), DeviceHeader(shortName: "Tim", fullName: "Saradeth"), DeviceHeader(shortName: "Matthew", fullName: "Saradeth")]
         let viewModel = ListViewModel(items:items)
         let vc = ListDeviceHeaderVC.createWith(title: btManager.btStatus.description(), viewModel: viewModel)
