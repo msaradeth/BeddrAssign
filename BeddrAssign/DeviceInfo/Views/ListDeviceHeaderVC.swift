@@ -16,7 +16,7 @@ class ListDeviceHeaderVC: UIViewController {
     var viewModel: ListViewModel!
     
     static func createWith(title: String, viewModel: ListViewModel) -> ListDeviceHeaderVC {
-        let vc = UIStoryboard.init(name: "BeddrDevices", bundle: nil).instantiateViewController(withIdentifier: "ListDeviceHeaderVC") as! ListDeviceHeaderVC
+        let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "ListDeviceHeaderVC") as! ListDeviceHeaderVC
         vc.navigationItem.title = title
         vc.viewModel = viewModel
         return vc

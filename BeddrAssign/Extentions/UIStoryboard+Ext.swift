@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 extension UIStoryboard {
-    func instantiateViewController<T>(ofType type: T.Type) -> T {
-        return instantiateViewController(withIdentifier: String(describing: type)) as! T
+    public static func createWith(storyBoard: String, withIdentifier: String) -> UIViewController {
+        return UIStoryboard.init(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: withIdentifier)
     }
 }
+
 

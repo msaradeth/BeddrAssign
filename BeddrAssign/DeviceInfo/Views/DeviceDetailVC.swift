@@ -17,8 +17,8 @@ class DeviceDetailVC: UIViewController {
     var deviceDetail: DeviceDetail?
     
     static func createWith(title: String, deviceDetail: DeviceDetail?) -> DeviceDetailVC {
-        let vc = UIStoryboard.init(name: "BeddrDevices", bundle: nil).instantiateViewController(withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
-        vc.navigationItem.title = title
+        let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
+        vc.title = title
         vc.deviceDetail = deviceDetail
         vc.subjectDeviceDetail = PublishSubject<DeviceDetail?>()
         return vc
@@ -35,4 +35,7 @@ class DeviceDetailVC: UIViewController {
         subjectDeviceDetail.onCompleted()
     }
     
+    deinit {
+        print("deinit DeviceDetailVC")
+    }
 }

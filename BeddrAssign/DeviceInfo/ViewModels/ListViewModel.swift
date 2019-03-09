@@ -17,12 +17,5 @@ class ListViewModel {
     init(items: [DeviceHeader]) {
         self.items = items
         self.itemsSubject = BehaviorSubject<[DeviceHeader]>(value: items)
-        
-        //update screen of any changes 
-//        deviceObservable
-//            .subscribe(onNext: { [weak self] (deviceHeaders) in
-//                self?.itemsSubject.onNext(deviceHeaders)
-//            })
-//            .disposed(by: disposeBag)
     }
 }
