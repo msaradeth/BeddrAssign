@@ -193,9 +193,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // to the peripheral succeeded
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         btState = .connected
-        stopScan()
+//        stopScan()
         
-        print("didConnect peripheral:  \(String(describing: peripheral.name))")
+        print("didConnect peripheral:  \(String(describing: peripheral))")
 //        print("peripheral: didConnect\(didConnect)")
 
         // look for services of interest on peripheral
@@ -665,7 +665,8 @@ extension BluetoothManager: CBCentralManagerDelegate {
 extension BluetoothManager: CBPeripheralDelegate {
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        print("didRetrievePeripherals peripherals")
+        print("didDiscoverServices peripheral:  \(peripheral)")
+
 //        for service in peripheral.services! {
 //            if service.uuid == serviceUUID {
 //                print("Service: \(service)")
