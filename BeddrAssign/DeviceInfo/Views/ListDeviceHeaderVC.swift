@@ -48,14 +48,12 @@ class ListDeviceHeaderVC: UIViewController {
                 guard let this = self else { return }
                 let indexPath = this.tableView.indexPathForSelectedRow
                 this.tableView.deselectRow(at: indexPath!, animated: true)
-                this.viewModel.connect(peripheral: deviceHeader.peripheral)?
-                    .subscribe(onNext: { btState in
-                        if btState == .connected {
-                            let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", deviceDetail: deviceHeader.deviceDetail)
-                            this.navigationController?.pushViewController(deviceDetailVC, animated: true)
-                        }
-                    })
-                    .disposed(by: this.disposeBag)
+                this.viewModel.connect(peripheral: deviceHeader.peripheral, completion: { (btState) in
+                    if btState == .connected {
+                        let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", deviceDetail: deviceHeader.deviceDetail)
+                        this.navigationController?.pushViewController(deviceDetailVC, animated: true)
+                    }
+                })
             })
             .disposed(by: disposeBag)
     }

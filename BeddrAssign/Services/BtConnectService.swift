@@ -17,6 +17,7 @@ class BtConnectService: BluetoothManager {
         return Observable.create({ [unowned self] (observer) -> Disposable in
             btService.connect(peripheral: peripheral)
             btService.subjectBtState.asObservable()
+                .skip(1)
                 .subscribe(onNext: { (btState) in
                     observer.onNext(btState)
                     observer.onCompleted()
