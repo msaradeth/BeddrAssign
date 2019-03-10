@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		23EB1B686636802EC22AC891 /* Pods_BeddrAssign.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030F5E1D576728B607A490A8 /* Pods_BeddrAssign.framework */; };
+		5E21A9D922357C910088A478 /* DeviceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9CA22357C910088A478 /* DeviceName.swift */; };
+		5E21A9DA22357C910088A478 /* ControlCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9CB22357C910088A478 /* ControlCommand.swift */; };
+		5E21A9DB22357C910088A478 /* RealtimeClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9CC22357C910088A478 /* RealtimeClock.swift */; };
+		5E21A9DC22357C910088A478 /* ControlStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9CD22357C910088A478 /* ControlStatus.swift */; };
+		5E21A9DE22357C910088A478 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9CF22357C910088A478 /* Version.swift */; };
+		5E21A9DF22357C910088A478 /* UniqueID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D022357C910088A478 /* UniqueID.swift */; };
+		5E21A9E022357C910088A478 /* Uuid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D122357C910088A478 /* Uuid.swift */; };
+		5E21A9E122357C910088A478 /* ChargingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D222357C910088A478 /* ChargingStatus.swift */; };
+		5E21A9E222357C910088A478 /* SlowNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D322357C910088A478 /* SlowNotification.swift */; };
+		5E21A9E322357C910088A478 /* BPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D422357C910088A478 /* BPM.swift */; };
+		5E21A9E422357C910088A478 /* Battery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D522357C910088A478 /* Battery.swift */; };
+		5E21A9E522357C910088A478 /* FastNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D622357C910088A478 /* FastNotification.swift */; };
+		5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D822357C910088A478 /* BloodOxygen.swift */; };
+		5E21A9EB223580460088A478 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9EA223580460088A478 /* Data+Ext.swift */; };
+		5E21A9ED223580960088A478 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9EC223580960088A478 /* String+Ext.swift */; };
 		5E3FE1BD22340E3A00B2537F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */; };
 		5E3FE1C422340E3C00B2537F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C322340E3C00B2537F /* Assets.xcassets */; };
 		5E3FE1C722340E3C00B2537F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */; };
@@ -21,9 +36,9 @@
 		5E3FE206223415BB00B2537F /* ListDeviceHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FF223415BA00B2537F /* ListDeviceHeaderVC.swift */; };
 		5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */; };
 		5E3FE20B2234235700B2537F /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20A2234235700B2537F /* BluetoothManager.swift */; };
-		5E3FE20E22342EE400B2537F /* Uuid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20D22342EE400B2537F /* Uuid.swift */; };
-		5E3FE21022342FBB00B2537F /* BtState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* BtState.swift */; };
+		5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */; };
 		5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */; };
+		5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA280D22358DF50031F273 /* BtParseReponse.swift */; };
 		5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37412234DC2300154BE8 /* BtConnectService.swift */; };
 		5EFA37452234DE2300154BE8 /* BtServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37442234DE2300154BE8 /* BtServices.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +62,21 @@
 
 /* Begin PBXFileReference section */
 		030F5E1D576728B607A490A8 /* Pods_BeddrAssign.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeddrAssign.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E21A9CA22357C910088A478 /* DeviceName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceName.swift; sourceTree = "<group>"; };
+		5E21A9CB22357C910088A478 /* ControlCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlCommand.swift; sourceTree = "<group>"; };
+		5E21A9CC22357C910088A478 /* RealtimeClock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealtimeClock.swift; sourceTree = "<group>"; };
+		5E21A9CD22357C910088A478 /* ControlStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlStatus.swift; sourceTree = "<group>"; };
+		5E21A9CF22357C910088A478 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		5E21A9D022357C910088A478 /* UniqueID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniqueID.swift; sourceTree = "<group>"; };
+		5E21A9D122357C910088A478 /* Uuid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Uuid.swift; sourceTree = "<group>"; };
+		5E21A9D222357C910088A478 /* ChargingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChargingStatus.swift; sourceTree = "<group>"; };
+		5E21A9D322357C910088A478 /* SlowNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlowNotification.swift; sourceTree = "<group>"; };
+		5E21A9D422357C910088A478 /* BPM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPM.swift; sourceTree = "<group>"; };
+		5E21A9D522357C910088A478 /* Battery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Battery.swift; sourceTree = "<group>"; };
+		5E21A9D622357C910088A478 /* FastNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastNotification.swift; sourceTree = "<group>"; };
+		5E21A9D822357C910088A478 /* BloodOxygen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BloodOxygen.swift; sourceTree = "<group>"; };
+		5E21A9EA223580460088A478 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
+		5E21A9EC223580960088A478 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		5E3FE1B922340E3A00B2537F /* BeddrAssign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeddrAssign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E3FE1C322340E3C00B2537F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,9 +96,9 @@
 		5E3FE1FF223415BA00B2537F /* ListDeviceHeaderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeviceHeaderVC.swift; sourceTree = "<group>"; };
 		5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		5E3FE20A2234235700B2537F /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		5E3FE20D22342EE400B2537F /* Uuid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uuid.swift; sourceTree = "<group>"; };
-		5E3FE20F22342FBB00B2537F /* BtState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtState.swift; sourceTree = "<group>"; };
+		5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+BtState.swift"; sourceTree = "<group>"; };
 		5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailVC.swift; sourceTree = "<group>"; };
+		5EFA280D22358DF50031F273 /* BtParseReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtParseReponse.swift; sourceTree = "<group>"; };
 		5EFA37412234DC2300154BE8 /* BtConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtConnectService.swift; sourceTree = "<group>"; };
 		5EFA37442234DE2300154BE8 /* BtServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtServices.swift; sourceTree = "<group>"; };
 		81EB72DB05E1013ACAFC90FB /* Pods-BeddrAssign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +140,39 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5E21A9C922357C910088A478 /* ParseSleepTuner */ = {
+			isa = PBXGroup;
+			children = (
+				5E21A9CA22357C910088A478 /* DeviceName.swift */,
+				5E21A9CB22357C910088A478 /* ControlCommand.swift */,
+				5E21A9CC22357C910088A478 /* RealtimeClock.swift */,
+				5E21A9CD22357C910088A478 /* ControlStatus.swift */,
+				5E21A9CF22357C910088A478 /* Version.swift */,
+				5E21A9D022357C910088A478 /* UniqueID.swift */,
+				5E21A9D122357C910088A478 /* Uuid.swift */,
+				5E21A9D222357C910088A478 /* ChargingStatus.swift */,
+				5E21A9D322357C910088A478 /* SlowNotification.swift */,
+				5E21A9D422357C910088A478 /* BPM.swift */,
+				5E21A9D522357C910088A478 /* Battery.swift */,
+				5E21A9D622357C910088A478 /* FastNotification.swift */,
+				5E21A9D822357C910088A478 /* BloodOxygen.swift */,
+			);
+			path = ParseSleepTuner;
+			sourceTree = "<group>";
+		};
+		5E21A9EE223582B70088A478 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				5EFA37442234DE2300154BE8 /* BtServices.swift */,
+				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
+				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
+				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
+				5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */,
+				5E21A9C922357C910088A478 /* ParseSleepTuner */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
 		5E3FE1B022340E3A00B2537F = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +200,8 @@
 			children = (
 				5E3FE1EB22340EE200B2537F /* Application */,
 				5E3FE1F5223415BA00B2537F /* DeviceInfo */,
-				5E3FE1ED22340F0D00B2537F /* Services */,
+				5E21A9EE223582B70088A478 /* Bluetooth */,
 				5E3FE20722341A1E00B2537F /* Extentions */,
-				5E3FE1EC22340EEC00B2537F /* Common */,
 				5E3FE1C322340E3C00B2537F /* Assets.xcassets */,
 				5E3FE1C822340E3C00B2537F /* Info.plist */,
 			);
@@ -172,24 +234,6 @@
 				5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		5E3FE1EC22340EEC00B2537F /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				5EFA37432234DE1000154BE8 /* Protocols */,
-				5E3FE20C22342EBA00B2537F /* Enums */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		5E3FE1ED22340F0D00B2537F /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
-				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		5E3FE1F5223415BA00B2537F /* DeviceInfo */ = {
@@ -233,25 +277,10 @@
 			isa = PBXGroup;
 			children = (
 				5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */,
+				5E21A9EA223580460088A478 /* Data+Ext.swift */,
+				5E21A9EC223580960088A478 /* String+Ext.swift */,
 			);
 			path = Extentions;
-			sourceTree = "<group>";
-		};
-		5E3FE20C22342EBA00B2537F /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				5E3FE20D22342EE400B2537F /* Uuid.swift */,
-				5E3FE20F22342FBB00B2537F /* BtState.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
-		5EFA37432234DE1000154BE8 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5EFA37442234DE2300154BE8 /* BtServices.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		939F0AAAFBB477B1A453F036 /* Frameworks */ = {
@@ -440,19 +469,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E3FE20E22342EE400B2537F /* Uuid.swift in Sources */,
+				5E21A9E022357C910088A478 /* Uuid.swift in Sources */,
 				5E3FE201223415BB00B2537F /* ListViewModel.swift in Sources */,
 				5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */,
 				5E3FE203223415BB00B2537F /* DeviceHeader.swift in Sources */,
+				5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */,
+				5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */,
+				5E21A9E322357C910088A478 /* BPM.swift in Sources */,
+				5E21A9E222357C910088A478 /* SlowNotification.swift in Sources */,
 				5EFA37452234DE2300154BE8 /* BtServices.swift in Sources */,
+				5E21A9DB22357C910088A478 /* RealtimeClock.swift in Sources */,
+				5E21A9E122357C910088A478 /* ChargingStatus.swift in Sources */,
+				5E21A9EB223580460088A478 /* Data+Ext.swift in Sources */,
+				5E21A9DE22357C910088A478 /* Version.swift in Sources */,
 				5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */,
 				5E3FE206223415BB00B2537F /* ListDeviceHeaderVC.swift in Sources */,
+				5E21A9E422357C910088A478 /* Battery.swift in Sources */,
 				5E3FE202223415BB00B2537F /* DeviceDetail.swift in Sources */,
+				5E21A9DC22357C910088A478 /* ControlStatus.swift in Sources */,
+				5E21A9ED223580960088A478 /* String+Ext.swift in Sources */,
+				5E21A9D922357C910088A478 /* DeviceName.swift in Sources */,
 				5E3FE20B2234235700B2537F /* BluetoothManager.swift in Sources */,
 				5E3FE1BD22340E3A00B2537F /* AppDelegate.swift in Sources */,
 				5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */,
 				5E3FE1EF22340F9800B2537F /* MainNavCntrl.swift in Sources */,
-				5E3FE21022342FBB00B2537F /* BtState.swift in Sources */,
+				5E21A9DF22357C910088A478 /* UniqueID.swift in Sources */,
+				5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */,
+				5E21A9DA22357C910088A478 /* ControlCommand.swift in Sources */,
+				5E21A9E522357C910088A478 /* FastNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

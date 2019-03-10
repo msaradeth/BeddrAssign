@@ -1,16 +1,17 @@
 //
 //  Uuid.swift
-//  BeddrAssign
+//  Beddr
 //
-//  Created by Mike Saradeth on 3/9/19.
-//  Copyright © 2019 Mike Saradeth. All rights reserved.
+//  Created by Milan Rada on 12.07.17.
+//  Copyright © 2017 STRV. All rights reserved.
 //
 
 import Foundation
 import CoreBluetooth
 
-public enum Uuid {
-    
+
+enum Uuid {
+
     static let service = uuid(suffix: 0x00)
     static let control = uuid(suffix: 0x01)
     static let slowNotifications = uuid(suffix: 0x02)
@@ -24,9 +25,9 @@ public enum Uuid {
     static let debugOut = uuid(suffix: 0x0A)
     static let debugIn = uuid(suffix: 0x0A)
     static let tunerCharging = uuid(suffix: 0x0B)
-    
+
     static private func uuid(suffix: UInt8) -> CBUUID {
         return CBUUID(string: String(format: "ACA100%02X-F151-43C1-A6D0-AE9A9A7B7FA3", suffix))
     }
-    
+
 }

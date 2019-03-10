@@ -16,7 +16,7 @@ class BtConnectService: BluetoothManager {
     func requestConnection(peripheral: CBPeripheral, btService: BtSerivces) -> Observable<BtState> {
         return Observable.create({ [unowned self] (observer) -> Disposable in
             btService.connect(peripheral: peripheral)
-            btService.subjectBtState.asObservable()
+            btService.subject.btState.asObservable()
                 .skip(1)
                 .subscribe(onNext: { (btState) in
                     observer.onNext(btState)

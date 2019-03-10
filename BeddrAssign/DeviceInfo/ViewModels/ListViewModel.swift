@@ -19,7 +19,7 @@ class ListViewModel {
     init(btServices: BtSerivces, btConnectService: BtConnectService) {
         self.btServices = btServices
         self.btConnectService = btConnectService
-        self.subjectDevices = btServices.subjectDevices
+        self.subjectDevices = btServices.subject.devices
     }
     
     func connect(peripheral: CBPeripheral?, completion: @escaping (BtState) -> Void) {
@@ -38,7 +38,7 @@ class ListViewModel {
     
     func disconnectIfConnected() {
         if btServices?.btState == .connected {
-//            btServices?.disconnect()
+            btServices?.disconnect()
         }
     }
 }
