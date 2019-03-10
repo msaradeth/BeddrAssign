@@ -35,6 +35,7 @@ class DeviceDetailVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        setupRx()
     }
     
     func setupRx() {
@@ -44,22 +45,14 @@ class DeviceDetailVC: UIViewController {
             .bind(to: deviceNameLabel.rx.text)
             .disposed(by: disposeBag)
         
-//        subject.deviceInfo.asObservable()
-//            .bind(to: deviceNameLabel.rx.text)
-//            .disposed(by: disposeBag)
-//
-//        subject.uniqueName.asObservable()
-//            .bind(to: deviceNameLabel.rx.text)
-//            .disposed(by: disposeBag)
-//
-//        subject.uniqueName.asObservable()
-//            .bind(to: deviceNameLabel.rx.text)
-//            .disposed(by: disposeBag)
-//
-//        subject.uniqueName.asObservable()
+//        subject.de.asObservable()
 //            .bind(to: deviceNameLabel.rx.text)
 //            .disposed(by: disposeBag)
         
+        subject.deviceInfo.asObservable()
+            .bind(to: deviceInfo.rx.text)
+            .disposed(by: disposeBag)
+
         subject.battery.asObservable()
             .bind(to: batteryLabel.rx.text)
             .disposed(by: disposeBag)
