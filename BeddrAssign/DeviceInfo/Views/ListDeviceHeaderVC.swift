@@ -24,45 +24,43 @@ class ListDeviceHeaderVC: UIViewController {
         return vc
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.disconnectIfConnected()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         setupRx()
     }
     
     func setupRx() {
-        viewModel.subjectDevice.asObservable()
+        viewModel.subjectDevices.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, item, cell) in
-                cell.textLabel?.text = item.shortName
-                cell.detailTextLabel?.text = item.fullName
+                cell.textLabel?.text = item.uuidString
+                cell.detailTextLabel?.text = item.shortName
             }
             .disposed(by: disposeBag)
         
         tableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
-    }
-        
-    deinit {
-        print("deinit ListDeviceHeaderVC")
-    }
-}
-
-
-extension ListDeviceHeaderVC: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        let deviceHeader = viewModel.items[indexPath.row]
-        let deviceDetailVC = DeviceDetailVC.createWith(title: deviceHeader.shortName, deviceDetail: deviceHeader.deviceDetail)
-        self.navigationController?.pushViewController(deviceDetailVC, animated: true)
-        
-        //setup to get data from DeviceDetailVC  
-        deviceDetailVC.observable
-            .subscribe(onNext: { [weak self] (deviceDetail) in
-                self?.viewModel.items[indexPath.row].deviceDetail = deviceDetail
+            .modelSelected(DeviceHeader.self)
+            .subscribe(onNext: { [weak self] deviceHeader in
+                guard let this = self else { return }
+                let indexPath = this.tableView.indexPathForSelectedRow
+                this.tableView.deselectRow(at: indexPath!, animated: true)
+                this.viewModel.connect(peripheral: deviceHeader.peripheral)?
+                    .subscribe(onNext: { btState in
+                        if btState == .connected {
+                            let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", deviceDetail: deviceHeader.deviceDetail)
+                            this.navigationController?.pushViewController(deviceDetailVC, animated: true)
+                        }
+                    })
+                    .disposed(by: this.disposeBag)
             })
             .disposed(by: disposeBag)
     }
+    
 }
+
+
+

@@ -12,6 +12,9 @@ import CoreBluetooth
 struct DeviceHeader {
     var shortName:String
     var fullName: String?
+    var uuidString: String {
+        return peripheral?.identifier.uuidString ?? ""
+    }
     var deviceDetail: DeviceDetail?
     var peripheral: CBPeripheral?
     

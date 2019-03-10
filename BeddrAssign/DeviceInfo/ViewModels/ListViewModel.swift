@@ -8,14 +8,32 @@
 
 import Foundation
 import RxSwift
+import CoreBluetooth
 
 class ListViewModel {
-    let disposeBag = DisposeBag()
-    var subjectDevice: BehaviorSubject<[DeviceHeader]>
-    var items: [DeviceHeader]
+    var subjectDevices: BehaviorSubject<[DeviceHeader]>
+    var btServices: BtSerivces?
+    var btConnectService: BtConnectService
     
-    init(items: [DeviceHeader], subjectDevice: BehaviorSubject<[DeviceHeader]>) {
-        self.items = items
-        self.subjectDevice = subjectDevice
+    init(btServices: BtSerivces, btConnectService: BtConnectService) {
+        self.btServices = btServices
+        self.btConnectService = btConnectService
+        self.subjectDevices = btServices.subjectDevices
+    }
+    
+    func connect(peripheral: CBPeripheral?) -> Observable<BtState>? {
+        disconnectIfConnected()
+        guard let peripheral = peripheral,
+            let btServices = self.btServices
+            else { return nil }
+        return btConnectService.requestConnection(peripheral: peripheral, btService: btServices)
+        btServices.connect(peripheral: peripheral)
+    }
+    
+    func disconnectIfConnected() {
+        if btServices?.btState == .connected {
+            btServices?.disconnect()
+        }
     }
 }
+

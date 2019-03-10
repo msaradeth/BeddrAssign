@@ -7,20 +7,14 @@
 //
 
 import UIKit
-import RxSwift
 
 class DeviceDetailVC: UIViewController {
-    private var subjectDeviceDetail: PublishSubject<DeviceDetail?>!
-    var observable: Observable<DeviceDetail?> {
-        return subjectDeviceDetail.asObservable()
-    }
     var deviceDetail: DeviceDetail?
     
     static func createWith(title: String, deviceDetail: DeviceDetail?) -> DeviceDetailVC {
         let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
         vc.title = title
         vc.deviceDetail = deviceDetail
-        vc.subjectDeviceDetail = PublishSubject<DeviceDetail?>()
         return vc
     }
     
@@ -28,14 +22,5 @@ class DeviceDetailVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        subjectDeviceDetail.onNext(deviceDetail)
-        subjectDeviceDetail.onCompleted()
-    }
-    
-    deinit {
-        print("deinit DeviceDetailVC")
     }
 }

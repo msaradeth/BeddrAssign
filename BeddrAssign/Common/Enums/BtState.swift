@@ -17,6 +17,7 @@ public enum BtState {
     case disconnecting
     case poweredOn
     case poweredOff
+    case invalidData
     case unknown
     
     func description() -> String {
@@ -35,6 +36,8 @@ public enum BtState {
             return "Bluetooth: poweredOn"
         case .poweredOff:
             return "Bluetooth: poweredOff"
+        case .invalidData:
+            return "Invalid data"
         default:
             return ""
         }

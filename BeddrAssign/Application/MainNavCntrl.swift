@@ -21,17 +21,15 @@ class MainNavCntrl: UINavigationController {
         navigationBar.prefersLargeTitles = true
         BluetoothManager.shared.subjectBtState.asObservable()
             .subscribe(onNext: { [weak self] (btStatus) in
-                self?.updateTitle(btStatus: btStatus)
+                self?.displayBtState(btStatus: btStatus)
             })
             .disposed(by: disposeBag)
     }
     
-
-
-    func updateTitle(btStatus: BtState) {
+    func displayBtState(btStatus: BtState) {
         for viewController in viewControllers {
             DispatchQueue.main.async {
-                viewController.navigationItem.title = btStatus.description()
+                viewController.navigationItem.rightBarButtonItem?.title = btStatus.description()
             }
             
         }

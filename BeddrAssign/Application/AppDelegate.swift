@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Setup App Entry Point
-        let viewModel = ListViewModel(items: btManager.devices, subjectDevice: btManager.subjectDevice)
-        let vc = ListDeviceHeaderVC.createWith(title: btManager.btStatus.description(), viewModel: viewModel)
+        //Setup App Entry Point  
+        let viewModel = ListViewModel(btServices: btManager, btConnectService: BtConnectService())
+        let vc = ListDeviceHeaderVC.createWith(title: "Sleep Tuner", viewModel: viewModel)
         let navCntrl = MainNavCntrl.init(rootViewController: vc)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
