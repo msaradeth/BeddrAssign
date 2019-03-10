@@ -120,6 +120,18 @@ extension BluetoothManager: CBCentralManagerDelegate {
         }
     }
     
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard let peripheralName = peripheral.name else { return }
+        //If is Sleep Tuner and not in devices list, add it to the list
+        if peripheralName == "SleepTun" {
+            if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
+                let deviceHeader = DeviceHeader(shortName: peripheralName, peripheral: peripheral)
+                print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
+                devices.append(deviceHeader)
+            }
+        }
+    }
+    
     // "Invoked when a connection is successfully created with a peripheral."
     // we can only move forwards when we know the connection
     // to the peripheral succeeded
@@ -137,28 +149,16 @@ extension BluetoothManager: CBCentralManagerDelegate {
         peripheralInstance?.discoverServices([serviceUUID])
     }
     
-    
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard let peripheralName = peripheral.name else { return }
-        if peripheralName == "SleepTun" {
-            if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-                let deviceHeader = DeviceHeader(shortName: peripheralName, peripheral: peripheral)
-                print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
-                devices.append(deviceHeader)
-            }
-        }
-        
-        // discover what peripheral devices OF INTEREST
-        // are available for this app to connect to
-        func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-            btState = .disconnected
-        }
-        
-        func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-            btState = .failToConnect
-        }
-
+    // discover what peripheral devices OF INTEREST
+    // are available for this app to connect to
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        btState = .disconnected
     }
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        btState = .failToConnect
+    }
+
 
 }
 
@@ -191,7 +191,6 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
     
     
-    
     // MARK: Handle Bluetooth Reponses
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         btParseReponse.updateValueForCharacteristic(characteristic: characteristic)
@@ -199,95 +198,5 @@ extension BluetoothManager: CBPeripheralDelegate {
 }
 
 
-
-//
-////MARK: - CBCentralManagerDelegate - handles connection
-//extension BluetoothManager: CBCentralManagerDelegate {
-//
-//    // this method is called based on
-//    // the device's Bluetooth state; we can ONLY
-//    // scan for peripherals if Bluetooth is .poweredOn
-//    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-//
-//        switch central.state {
-//        case .poweredOn:
-//            btStatus = .poweredOn
-//            scanForPeripherals()
-//        case .poweredOff:
-//            btStatus = .poweredOff
-//            if isScanning() {
-////                stopScan()
-//            }
-//        default:
-//            _ = "central.state is default - do nothing at this time."
-//        }
-//    }
-//
-//
-//    // "Invoked when a connection is successfully created with a peripheral."
-//    // we can only move forwards when we know the connection
-//    // to the peripheral succeeded
-//    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-//        btStatus = .connected
-//
-//        print("didConnect peripheral:  \(String(describing: peripheral.name))")
-//        print(peripheral)
-//
-//        // look for services of interest on peripheral
-//        peripheralInstance?.discoverServices([serviceUUID])
-//    }
-//
-//
-//    // discover what peripheral devices OF INTEREST
-//    // are available for this app to connect to
-//    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-//        btStatus = .disconnected
-//
-//        //start scanning
-//        centralManager?.scanForPeripherals(withServices: [serviceUUID])
-//    }
-//
-//    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-//        btStatus = .failToConnect
-//    }
-//
-//    // discover what peripheral devices OF INTEREST
-//    // are available for this app to connect to
-//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-//        // store a reference to the peripheral in
-//        // class instance variable
-//        print("didDiscover peripheral:  \(String(describing: peripheral.name))")
-//
-//
-//        if peripheral.name == "SleepTun" {
-//            print(peripheral.name)
-//            let deviceHeader = DeviceHeader(shortName: peripheral.name!, peripheral: peripheral)
-//            devices.append(deviceHeader)
-//            centralManager?.connect(peripheralInstance!)
-////            peripheralInstance = peripheral
-////            peripheralInstance?.delegate = self
-////            centralManager?.stopScan()
-////            centralManager?.connect(peripheralInstance!)
-//        }
-//
-//        // stop scanning to preserve battery life;
-//        // re-scan if disconnected
-//
-//
-//        // connect to the discovered peripheral of interest
-////        if persistanceDevice?.getUUID() == peripheral.identifier.uuidString && peripheral.state == .disconnected {
-////            connect(peripheral: peripheral)
-////        }
-////        if peripheral.state == .disconnected {
-////            let pairingDevice = PairingDevice(peripheral: peripheral, rssi: RSSI)
-////            devices.value.append(pairingDevice)
-////        }
-//
-//
-//    }
-//}
-//
-//
-//
 
 
