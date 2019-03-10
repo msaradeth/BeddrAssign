@@ -68,7 +68,7 @@ class BluetoothManager: NSObject {
 
 
 
-// MARK: - Protocol for BtSerivces
+// MARK: - Protocol for BluetoothService
 extension BluetoothManager: BluetoothService {
     
     func write(data: Data) {
@@ -167,6 +167,63 @@ extension BluetoothManager: CBCentralManagerDelegate {
 
 }
 
+
+
+//MARK: - CBPeripheralDelegate
+extension BluetoothManager: CBPeripheralDelegate {
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        print("didDiscoverServices peripheral:  \(peripheral)")
+        guard let myServices = peripheral.services?.filter({ $0==serviceUUID }) else { return }
+        for service in myServices {
+            peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
+        }
+    }
+    
+    // confirm we've discovered characteristics
+    // of interest within services of interest
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
+        guard let characteristics = service.characteristics else { return }
+        for characteristic in characteristics {
+            updateDiscoverCharacteristic(characteristic: characteristic)
+        }
+    }
+    
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        NSLog("didWriteValueFor characteristice uuid: \(String(describing: characteristicInstance?.uuid))")
+    }
+    
+    
+    
+    // MARK: Handle Bluetooth Reponses
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        btParseReponse.updateValueForCharacteristic(characteristic: characteristic)
+    }
+}
+
+
+
+// MARK: BluetoothManger - Helper functions
+extension BluetoothManager {
+    
+    func updateDiscoverCharacteristic(characteristic: CBCharacteristic) {
+        switch characteristic.uuid {
+        case Uuid.uniqueName:
+            btCharistic.uniqueName = characteristic
+        case Uuid.battery:
+            btCharistic.battery = characteristic
+        case Uuid.info:
+            btCharistic.deviceInfo = characteristic
+        default:
+            break
+        }
+    }
+}
+
+
+
 //
 ////MARK: - CBCentralManagerDelegate - handles connection
 //extension BluetoothManager: CBCentralManagerDelegate {
@@ -256,59 +313,5 @@ extension BluetoothManager: CBCentralManagerDelegate {
 //
 //
 //
-
-//MARK: - CBPeripheralDelegate
-extension BluetoothManager: CBPeripheralDelegate {
-
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        print("didDiscoverServices peripheral:  \(peripheral)")
-        guard let myServices = peripheral.services?.filter({ $0==serviceUUID }) else { return }
-        for service in myServices {
-            peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
-        }
-    }
-    
-    // confirm we've discovered characteristics
-    // of interest within services of interest
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
-        guard let characteristics = service.characteristics else { return }
-        for characteristic in characteristics {
-            updateDiscoverCharacteristic(characteristic: characteristic)
-        }
-    }
-
-    
-    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        NSLog("didWriteValueFor characteristice uuid: \(String(describing: characteristicInstance?.uuid))")
-    }
-    
-    
-
-    // MARK: Handle Bluetooth Reponses
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        btParseReponse.updateValueForCharacteristic(characteristic: characteristic)
-    }
-}
-
-
-
-// MARK: BluetoothManger - Helper functions
-extension BluetoothManager {
-  
-    func updateDiscoverCharacteristic(characteristic: CBCharacteristic) {
-        switch characteristic.uuid {
-        case Uuid.uniqueName:
-            btCharistic.uniqueName = characteristic
-        case Uuid.battery:
-            btCharistic.battery = characteristic
-        case Uuid.info:
-            btCharistic.deviceInfo = characteristic 
-        default:
-            break
-        }
-    }        
-}
-
 
 
