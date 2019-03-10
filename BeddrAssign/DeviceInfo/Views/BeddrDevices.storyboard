@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="6TW-7W-k9E">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="50" width="359" height="587"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Mgy-pt-USI">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
@@ -43,7 +43,7 @@
                                         <viewLayoutGuide key="safeArea" id="7n2-fx-jIa"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="OJs-4W-Any">
-                                        <rect key="frame" x="0.0" y="150.5" width="359" height="30"/>
+                                        <rect key="frame" x="0.0" y="139.5" width="359" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device ID:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oe-in-69B">
                                                 <rect key="frame" x="0.0" y="0.0" width="233" height="30"/>
@@ -64,7 +64,7 @@
                                         <viewLayoutGuide key="safeArea" id="Voo-P5-imV"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="8hF-Cg-ub8">
-                                        <rect key="frame" x="0.0" y="300.5" width="359" height="30"/>
+                                        <rect key="frame" x="0.0" y="278.5" width="359" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Status:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M27-gw-96D">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
@@ -85,7 +85,7 @@
                                         <viewLayoutGuide key="safeArea" id="Z7r-ZP-r2C"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="MbQ-Tz-TkC">
-                                        <rect key="frame" x="0.0" y="451" width="359" height="30"/>
+                                        <rect key="frame" x="0.0" y="418" width="359" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Info:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiH-RJ-uTP">
                                                 <rect key="frame" x="0.0" y="0.0" width="245" height="30"/>
@@ -105,7 +105,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-2l-SJo">
-                                        <rect key="frame" x="0.0" y="601" width="359" height="30"/>
+                                        <rect key="frame" x="0.0" y="557" width="359" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwt-3o-nA4">
                                                 <rect key="frame" x="0.0" y="0.0" width="212" height="30"/>
@@ -130,8 +130,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fXa-Pg-SNd" firstAttribute="bottom" secondItem="6TW-7W-k9E" secondAttribute="bottom" constant="8" id="27h-A1-LEX"/>
-                            <constraint firstItem="6TW-7W-k9E" firstAttribute="top" secondItem="fXa-Pg-SNd" secondAttribute="top" constant="8" id="WqN-8c-F8P"/>
+                            <constraint firstItem="fXa-Pg-SNd" firstAttribute="bottom" secondItem="6TW-7W-k9E" secondAttribute="bottom" constant="30" id="27h-A1-LEX"/>
+                            <constraint firstItem="6TW-7W-k9E" firstAttribute="top" secondItem="fXa-Pg-SNd" secondAttribute="top" constant="30" id="WqN-8c-F8P"/>
                             <constraint firstItem="6TW-7W-k9E" firstAttribute="leading" secondItem="gof-Md-dMm" secondAttribute="leading" constant="8" id="b62-Nf-HxZ"/>
                             <constraint firstItem="fXa-Pg-SNd" firstAttribute="trailing" secondItem="6TW-7W-k9E" secondAttribute="trailing" constant="8" id="g3L-u3-ZTx"/>
                         </constraints>

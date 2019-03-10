@@ -45,9 +45,9 @@ class DeviceDetailVC: UIViewController {
             .bind(to: deviceNameLabel.rx.text)
             .disposed(by: disposeBag)
         
-//        subject.de.asObservable()
-//            .bind(to: deviceNameLabel.rx.text)
-//            .disposed(by: disposeBag)
+        subject.btStatus.asObservable()
+            .bind(to: deviceStatus.rx.text)
+            .disposed(by: disposeBag)
         
         subject.deviceInfo.asObservable()
             .bind(to: deviceInfo.rx.text)

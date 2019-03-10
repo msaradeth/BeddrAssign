@@ -17,6 +17,7 @@ struct BluetoothSubject {
     var uniqueName: BehaviorSubject<String>
     var battery: BehaviorSubject<String>
     var deviceInfo: BehaviorSubject<String>
+    var btStatus: BehaviorSubject<String>
     
     init() {
         btState = BehaviorSubject<BtState>(value: .unknown)
@@ -24,6 +25,7 @@ struct BluetoothSubject {
         uniqueName = BehaviorSubject<String>(value: "")
         battery = BehaviorSubject<String>(value: "")
         deviceInfo = BehaviorSubject<String>(value: "")
+        btStatus = BehaviorSubject<String>(value: "")
     }
 }
 

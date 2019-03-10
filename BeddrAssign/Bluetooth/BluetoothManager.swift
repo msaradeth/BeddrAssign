@@ -27,6 +27,7 @@ class BluetoothManager: NSObject {
     public var btState: BtState {
         didSet {
             subject.btState.onNext(btState)
+            subject.btStatus.onNext(btState.description())
         }
     }
     public var devices: [DeviceHeader] {
