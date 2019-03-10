@@ -39,6 +39,7 @@
 		5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */; };
 		5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */; };
 		5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA280D22358DF50031F273 /* BtParseReponse.swift */; };
+		5EFA28102235C8B90031F273 /* BtCharacteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */; };
 		5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37412234DC2300154BE8 /* BtConnectService.swift */; };
 		5EFA37452234DE2300154BE8 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37442234DE2300154BE8 /* BluetoothService.swift */; };
 /* End PBXBuildFile section */
@@ -99,6 +100,7 @@
 		5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+BtState.swift"; sourceTree = "<group>"; };
 		5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailVC.swift; sourceTree = "<group>"; };
 		5EFA280D22358DF50031F273 /* BtParseReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtParseReponse.swift; sourceTree = "<group>"; };
+		5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtCharacteristic.swift; sourceTree = "<group>"; };
 		5EFA37412234DC2300154BE8 /* BtConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtConnectService.swift; sourceTree = "<group>"; };
 		5EFA37442234DE2300154BE8 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		81EB72DB05E1013ACAFC90FB /* Pods-BeddrAssign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				5EFA37442234DE2300154BE8 /* BluetoothService.swift */,
 				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
 				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
+				5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */,
 				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
 				5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */,
 				5E21A9C922357C910088A478 /* ParseSleepTuner */,
@@ -488,6 +491,7 @@
 				5E3FE202223415BB00B2537F /* DeviceDetail.swift in Sources */,
 				5E21A9DC22357C910088A478 /* ControlStatus.swift in Sources */,
 				5E21A9ED223580960088A478 /* String+Ext.swift in Sources */,
+				5EFA28102235C8B90031F273 /* BtCharacteristic.swift in Sources */,
 				5E21A9D922357C910088A478 /* DeviceName.swift in Sources */,
 				5E3FE20B2234235700B2537F /* BluetoothManager.swift in Sources */,
 				5E3FE1BD22340E3A00B2537F /* AppDelegate.swift in Sources */,

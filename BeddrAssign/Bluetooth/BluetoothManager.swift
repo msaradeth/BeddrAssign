@@ -12,17 +12,11 @@ import CoreBluetooth
 import RxSwift
 
 
-struct BtCharacteristic {
-    var uniqueName: CBCharacteristic?
-    var battery: CBCharacteristic?
-    var deviceInfo: CBCharacteristic?
-}
-
 class BluetoothManager: NSObject {
     static let shared = BluetoothManager()
     
     // MARK: - Observer Properties
-    var btCharistic: BtCharacteristic
+    var btCharacteristic: BtCharacteristic
     public var subject: BluetoothSubject
     public var btState: BtState {
         didSet {
@@ -41,7 +35,7 @@ class BluetoothManager: NSObject {
     fileprivate var characteristicInstance: CBCharacteristic?
     fileprivate var peripheralInstance: CBPeripheral?
     fileprivate let serviceUUID = Uuid.service
-    fileprivate let characteristicUUIDs = [Uuid.control, Uuid.slowNotifications, Uuid.upload, Uuid.info, Uuid.battery, Uuid.uniqueName, Uuid.uniqueId, Uuid.realtimeClock, Uuid.debugOut, Uuid.debugIn,Uuid.tunerCharging]
+    fileprivate var characteristicUUIDs: [CBUUID]
 
     // MARK: helper properties
     fileprivate var btParseReponse: BtParseReponse!
@@ -50,8 +44,9 @@ class BluetoothManager: NSObject {
         //Init Properties
         btState = .unknown
         devices = []
-        btCharistic = BtCharacteristic()
+        btCharacteristic = BtCharacteristic()
         subject = BluetoothSubject()
+        characteristicUUIDs = btCharacteristic.getCharacteristicUUIDs()
         
         super.init()
         btParseReponse = BtParseReponse(btService: self)
@@ -186,7 +181,7 @@ extension BluetoothManager: CBPeripheralDelegate {
         print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
-            updateDiscoverCharacteristic(characteristic: characteristic)
+            btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
         }
     }
     
@@ -200,25 +195,6 @@ extension BluetoothManager: CBPeripheralDelegate {
     // MARK: Handle Bluetooth Reponses
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         btParseReponse.updateValueForCharacteristic(characteristic: characteristic)
-    }
-}
-
-
-
-// MARK: BluetoothManger - Helper functions
-extension BluetoothManager {
-    
-    func updateDiscoverCharacteristic(characteristic: CBCharacteristic) {
-        switch characteristic.uuid {
-        case Uuid.uniqueName:
-            btCharistic.uniqueName = characteristic
-        case Uuid.battery:
-            btCharistic.battery = characteristic
-        case Uuid.info:
-            btCharistic.deviceInfo = characteristic
-        default:
-            break
-        }
     }
 }
 
