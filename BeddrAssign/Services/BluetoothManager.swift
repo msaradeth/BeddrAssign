@@ -116,11 +116,12 @@ extension BluetoothManager: BtSerivces {
     }
     
     public func connect(peripheral: CBPeripheral?) {
-        guard let peripheral = peripheral else {
+        guard let peripheralInstance = peripheral else {
             btState = .invalidData
             return
         }
-        centralManager?.connect(peripheral, options: nil)
+        self.peripheralInstance = peripheralInstance
+        centralManager?.connect(peripheralInstance, options: nil)
     }
     
     
@@ -195,10 +196,11 @@ extension BluetoothManager: CBCentralManagerDelegate {
         stopScan()
         
         print("didConnect peripheral:  \(String(describing: peripheral.name))")
-        print(peripheral)
+//        print("peripheral: didConnect\(didConnect)")
 
         // look for services of interest on peripheral
         peripheralInstance = peripheral
+        peripheralInstance?.delegate = self
         peripheralInstance?.discoverServices([serviceUUID])
     }
     
@@ -240,11 +242,12 @@ extension BluetoothManager: CBCentralManagerDelegate {
     
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard let peripheralName = peripheral.name else { return }
 
-        if peripheral.name == "SleepTun" {
+        if peripheralName == "SleepTun" {
             if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-                let deviceHeader = DeviceHeader(shortName: peripheral.name!, peripheral: peripheral)
-                print(peripheral.name!, peripheral.identifier.uuidString)
+                let deviceHeader = DeviceHeader(shortName: peripheralName, peripheral: peripheral)
+                print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
                 devices.append(deviceHeader)
             }
             
@@ -268,6 +271,60 @@ extension BluetoothManager: CBCentralManagerDelegate {
             //            centralManager?.connect(peripheralInstance!)
         }
         
+        
+        
+        // discover what peripheral devices OF INTEREST
+        // are available for this app to connect to
+        func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+            btState = .disconnected
+//            scan()
+            
+            //start scanning
+//            centralManager?.scanForPeripherals(withServices: [serviceUUID])
+        }
+        
+        
+
+    
+        func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+            btState = .failToConnect
+        }
+    
+//        // discover what peripheral devices OF INTEREST
+//        // are available for this app to connect to
+//        func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+//            // store a reference to the peripheral in
+//            // class instance variable
+//            print("didDiscover peripheral:  \(String(describing: peripheral.name))")
+//
+//
+//            if peripheral.name == "SleepTun" {
+//                print(peripheral.name)
+//                let deviceHeader = DeviceHeader(shortName: peripheral.name!, peripheral: peripheral)
+//                devices.append(deviceHeader)
+//                centralManager?.connect(peripheralInstance!)
+//    //            peripheralInstance = peripheral
+//    //            peripheralInstance?.delegate = self
+//    //            centralManager?.stopScan()
+//    //            centralManager?.connect(peripheralInstance!)
+//            }
+//
+//            // stop scanning to preserve battery life;
+//            // re-scan if disconnected
+//
+//
+//            // connect to the discovered peripheral of interest
+//    //        if persistanceDevice?.getUUID() == peripheral.identifier.uuidString && peripheral.state == .disconnected {
+//    //            connect(peripheral: peripheral)
+//    //        }
+//    //        if peripheral.state == .disconnected {
+//    //            let pairingDevice = PairingDevice(peripheral: peripheral, rssi: RSSI)
+//    //            devices.value.append(pairingDevice)
+//    //        }
+//
+//
+//        }
+//
         
 //        let peripheralConnectable: AnyObject = advertisementData["kCBAdvDataIsConnectable"]! as AnyObject
 //
@@ -603,63 +660,85 @@ extension BluetoothManager: CBCentralManagerDelegate {
 //
 //
 //
-//
-////MARK: - CBPeripheralDelegate
-//extension BluetoothManager: CBPeripheralDelegate {
-//
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-//        print("didDiscoverServices error: \(peripheral.services)")
+
+//MARK: - CBPeripheralDelegate
+extension BluetoothManager: CBPeripheralDelegate {
+
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        print("didRetrievePeripherals peripherals")
 //        for service in peripheral.services! {
 //            if service.uuid == serviceUUID {
 //                print("Service: \(service)")
 //
 //                // look for characteristics of interest
 //                // within services of interest
-//                peripheral.discoverCharacteristics([characteristicUUID], for: service )
+////                peripheral.discoverCharacteristics([characteristicUUID], for: service )
 //            }
 //        }
-//    }
-//
-//
-//    // confirm we've discovered characteristics
-//    // of interest within services of interest
-//    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-//        for characteristic in service.characteristics! {
-//            print(characteristic)
-//            if characteristic.uuid == characteristicUUID {
-//                characteristicInstance = characteristic
-//                if isScanning() {
-//                    stopScan()
-//                }
-//
-//                // subscribe to regular notifications
-//                // for characteristic of interest;
-//                // "When you enable notifications for the
-//                // characteristic’s value, the peripheral calls
-//                // ... peripheral(_:didUpdateValueFor:error:)
-//                //
-//                // Notify    Mandatory
-//                //
+    }
+
+
+    // confirm we've discovered characteristics
+    // of interest within services of interest
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        guard let characteristics = service.characteristics,
+            let characteristicInstance = self.characteristicInstance else { return }
+        
+        // subscribe to regular notifications
+        // for characteristic of interest;
+        // "When you enable notifications for the
+        // characteristic’s value, the peripheral calls
+        // ... peripheral(_:didUpdateValueFor:error:)
+        //
+        // Notify    Mandatory
+        //
+        
+        for characteristic in characteristics {
+            NSLog("Service discovered: \(service.uuid)")
+            if (service.uuid == serviceUUID) {
+                peripheral.setNotifyValue(true, for: characteristic)
+                if characteristic.uuid == characteristicInstance.uuid {
+                    peripheral.setNotifyValue(true, for: characteristic )
+                    self.characteristicInstance = characteristic
+                    if isScanning() {
+                        stopScan()
+                    }
+                    
+                    //Testing Connection
+                }
+                peripheral.discoverCharacteristics([characteristicInstance.uuid], for: service )
+                //                peripheral.discoverCharacteristics([characteristicUUID], for: service )
+            }
+        }
+//        for service in services {
+//            NSLog("Service discovered: \(service.uuid)")
+//            if (service.uuid == serviceUUID) {
 //                peripheral.setNotifyValue(true, for: characteristic)
-//
-//                break
+//                peripheral.discoverCharacteristics([characteristicInstance.uuid], for: service )
+////                peripheral.discoverCharacteristics([characteristicUUID], for: service )
 //            }
 //        }
-//    }
-//
-//
-//    // MARK: Handle Bluetooth Reponses
-//    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-//        //convert data to array of [UInt8]
-//        var bytesData = [UInt8] (repeating: 0, count: characteristic.value!.count)
-//        (characteristic.value! as NSData).getBytes(&bytesData, length: characteristic.value!.count)
+    }
+
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        NSLog("didWriteValueFor characteristice uuid: \(String(describing: characteristicInstance?.uuid))")
+    }
+    
+    
+
+    // MARK: Handle Bluetooth Reponses
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        //convert data to array of [UInt8]
+        var bytesData = [UInt8] (repeating: 0, count: characteristic.value!.count)
+        (characteristic.value! as NSData).getBytes(&bytesData, length: characteristic.value!.count)
 //        inBufferByte.append(contentsOf: bytesData)
 //
 //        if let packetDataAscii = String(bytes: bytesData, encoding: String.Encoding.ascii) {
 //            inBufferAscii.append(packetDataAscii)
 //        }
-//    }
-//}
+    }
+}
 
 
 
