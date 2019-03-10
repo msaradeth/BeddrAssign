@@ -11,6 +11,20 @@ import CoreBluetooth
 import RxSwift
 
 
+protocol BluetoothService {
+    var subject: BluetoothSubject { get set }
+    var btState: BtState { get set }
+    
+    func write(data: Data)
+    func scanForPeripherals()
+    func stopScan()
+    func isScanning()  -> Bool
+    func connect(peripheral: CBPeripheral?)
+    func disconnect()
+}
+
+
+
 struct BluetoothSubject {
     var btState: BehaviorSubject<BtState>
     var devices: BehaviorSubject<[DeviceHeader]>
@@ -28,17 +42,3 @@ struct BluetoothSubject {
         btStatus = BehaviorSubject<String>(value: "")
     }
 }
-
-protocol BluetoothService {
-    var subject: BluetoothSubject { get set }
-    var btState: BtState { get set }
-    
-    func write(data: Data)
-    func scanForPeripherals()
-    func stopScan()
-    func isScanning()  -> Bool
-    func connect(peripheral: CBPeripheral?)
-    func disconnect()
-}
-
-
