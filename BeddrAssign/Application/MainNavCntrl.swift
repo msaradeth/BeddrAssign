@@ -19,7 +19,7 @@ class MainNavCntrl: UINavigationController {
 
         // Do any additional setup after loading the view.
         navigationBar.prefersLargeTitles = true
-        BluetoothManager.shared.observable
+        BluetoothManager.shared.subjectBtState.asObservable()
             .subscribe(onNext: { [weak self] (btStatus) in
                 self?.updateTitle(btStatus: btStatus)
             })

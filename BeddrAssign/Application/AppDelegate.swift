@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //Setup App Entry Point
-        let items = [DeviceHeader(shortName: "Mike", fullName: "Saradeth"), DeviceHeader(shortName: "Tim", fullName: "Saradeth"), DeviceHeader(shortName: "Matthew", fullName: "Saradeth")]
-        let viewModel = ListViewModel(items:items)
+        let viewModel = ListViewModel(items: btManager.devices, subjectDevice: btManager.subjectDevice)
         let vc = ListDeviceHeaderVC.createWith(title: btManager.btStatus.description(), viewModel: viewModel)
         let navCntrl = MainNavCntrl.init(rootViewController: vc)
         

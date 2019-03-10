@@ -32,7 +32,7 @@ class ListDeviceHeaderVC: UIViewController {
     }
     
     func setupRx() {
-        viewModel.itemsSubject.asObservable()
+        viewModel.subjectDevice.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, item, cell) in
                 cell.textLabel?.text = item.shortName
                 cell.detailTextLabel?.text = item.fullName
@@ -55,7 +55,7 @@ extension ListDeviceHeaderVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         let deviceHeader = viewModel.items[indexPath.row]
-        let deviceDetailVC = DeviceDetailVC.createWith(title: deviceHeader.fullName, deviceDetail: deviceHeader.deviceDetail)
+        let deviceDetailVC = DeviceDetailVC.createWith(title: deviceHeader.shortName, deviceDetail: deviceHeader.deviceDetail)
         self.navigationController?.pushViewController(deviceDetailVC, animated: true)
         
         //setup to get data from DeviceDetailVC  

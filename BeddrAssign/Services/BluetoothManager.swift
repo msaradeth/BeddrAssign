@@ -15,15 +15,23 @@ import RxSwift
 class BluetoothManager: NSObject {
     static let shared = BluetoothManager()
     
-    public var subjectBtState: BehaviorSubject<BtState>!
-    public var observable: Observable<BtState> {
-        return subjectBtState.asObservable()
-    }
+    public var subjectBtState: BehaviorSubject<BtState>
+    public var subjectDevice: BehaviorSubject<[DeviceHeader]>
     var btStatus: BtState {
         didSet {
             subjectBtState.onNext(btStatus)
         }
-    }    
+    }
+    var devices: [DeviceHeader] {
+        didSet {
+            subjectDevice.onNext(devices)
+        }
+    }
+    
+    var characteristicInstance: CBCharacteristic?
+    var peripheralInstance: CBPeripheral?
+    
+    
     var currentCommand: NSObject?
     var logArr = [String]()
     
@@ -32,8 +40,7 @@ class BluetoothManager: NSObject {
     let characteristicUUID = CBUUID(string: "49535343-1E4D-4BD9-BA61-23C647249616")
     var centralManager: CBCentralManager?
     var discoveredPeripheral: CBPeripheral?
-    var characteristicInstance: CBCharacteristic?
-    var peripheralInstance: CBPeripheral?
+
     
     
     var inBufferByte: Array<UInt8> = [UInt8]()
@@ -41,12 +48,15 @@ class BluetoothManager: NSObject {
     
     override init() {
         btStatus = .unknown
+        devices = []
         subjectBtState = BehaviorSubject<BtState>(value: btStatus)
+        subjectDevice = BehaviorSubject<[DeviceHeader]>(value: devices)
         
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: true)])
         if let centralManager = centralManager, centralManager.state == .poweredOn {
             btStatus = .poweredOn
+            scanForPeripherals()
         }else {
             btStatus = .poweredOff
         }
@@ -78,7 +88,7 @@ class BluetoothManager: NSObject {
     
     
     func scanForPeripherals() {
-        centralManager?.scanForPeripherals(withServices: [serviceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        centralManager?.scanForPeripherals(withServices: [Uuid.service], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
         
         //        centralManager?.scanForPeripherals(withServices: [serviceUUID])
         
@@ -127,6 +137,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
             scanForPeripherals()
         case .poweredOff:
             btStatus = .poweredOff
+            if isScanning() {
+//                stopScan()
+            }
         default:
             _ = "central.state is default - do nothing at this time."
         }
@@ -138,6 +151,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // to the peripheral succeeded
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         btStatus = .connected
+        
+        print("didConnect peripheral:  \(String(describing: peripheral.name))")
+        print(peripheral)
         
         // look for services of interest on peripheral
         peripheralInstance?.discoverServices([serviceUUID])
@@ -162,15 +178,37 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // store a reference to the peripheral in
         // class instance variable
-        peripheralInstance = peripheral
-        peripheralInstance?.delegate = self
+        print("didDiscover peripheral:  \(String(describing: peripheral.name))")
+     
+        
+        if peripheral.name == "SleepTun" {
+            print(peripheral.name)
+            stopScan()
+            let deviceHeader = DeviceHeader(shortName: peripheral.name!, peripheral: peripheral)
+            devices.append(deviceHeader)
+            
+//            centralManager?.connect(peripheralInstance!)
+            
+            peripheralInstance = peripheral
+            peripheralInstance?.delegate = self
+            centralManager?.stopScan()
+            centralManager?.connect(peripheralInstance!)
+        }
         
         // stop scanning to preserve battery life;
         // re-scan if disconnected
-        centralManager?.stopScan()
+        
         
         // connect to the discovered peripheral of interest
-        centralManager?.connect(peripheralInstance!)
+//        if persistanceDevice?.getUUID() == peripheral.identifier.uuidString && peripheral.state == .disconnected {
+//            connect(peripheral: peripheral)
+//        }
+//        if peripheral.state == .disconnected {
+//            let pairingDevice = PairingDevice(peripheral: peripheral, rssi: RSSI)
+//            devices.value.append(pairingDevice)
+//        }
+        
+        
     }
 }
 
@@ -181,8 +219,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
 extension BluetoothManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        print("didDiscoverServices error: \(peripheral.services)")
         for service in peripheral.services! {
-            if service.uuid == serviceUUID {
+            if service.uuid == Uuid.service {
                 print("Service: \(service)")
                 
                 // look for characteristics of interest

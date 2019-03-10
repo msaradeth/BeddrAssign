@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 
 class ListViewModel {
-    var itemsSubject: BehaviorSubject<[DeviceHeader]>
-    var items: [DeviceHeader]
     let disposeBag = DisposeBag()
+    var subjectDevice: BehaviorSubject<[DeviceHeader]>
+    var items: [DeviceHeader]
     
-    init(items: [DeviceHeader]) {
+    init(items: [DeviceHeader], subjectDevice: BehaviorSubject<[DeviceHeader]>) {
         self.items = items
-        self.itemsSubject = BehaviorSubject<[DeviceHeader]>(value: items)
+        self.subjectDevice = subjectDevice
     }
 }
