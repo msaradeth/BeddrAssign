@@ -27,9 +27,9 @@ class BtParseReponse {
         case Uuid.uniqueName:
             subject.uniqueName.onNext(DeviceName(characteristic: characteristic).name)
         case Uuid.battery:
-            subject.battery.onNext(Battery(characteristic: characteristic))
+            subject.battery.onNext(Battery(characteristic: characteristic).description)
         case Uuid.info:
-            subject.deviceInfo.onNext(Version(characteristic))
+            subject.deviceInfo.onNext(Version(characteristic).fwString)
         default:
             break
         }

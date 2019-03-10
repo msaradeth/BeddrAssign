@@ -15,15 +15,15 @@ struct BluetoothSubjects {
     var btState: BehaviorSubject<BtState>
     var devices: BehaviorSubject<[DeviceHeader]>
     var uniqueName: PublishSubject<String>
-    var battery: PublishSubject<Battery>
-    var deviceInfo: PublishSubject<Version>
+    var battery: PublishSubject<String>
+    var deviceInfo: PublishSubject<String>
     
     init() {
         btState = BehaviorSubject<BtState>(value: .unknown)
         devices = BehaviorSubject<[DeviceHeader]>(value: [])
         uniqueName = PublishSubject<String>()
-        battery = PublishSubject<Battery>()
-        deviceInfo = PublishSubject<Version>()
+        battery = PublishSubject<String>()
+        deviceInfo = PublishSubject<String>()
     }
 }
 

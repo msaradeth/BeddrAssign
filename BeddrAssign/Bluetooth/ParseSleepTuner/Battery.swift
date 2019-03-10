@@ -6,18 +6,14 @@ import CoreBluetooth
 enum Battery : CustomStringConvertible {
 
     var description : String {
-        return ""
-        /**
         switch self {
         case .low:
             return "low battery"
-        case .medium:
-            return "medium battery"
         case .high:
             return "high battery"
         case .unknown:
             return "unknown battery"
-        }**/
+        }
     }
 
     case low
