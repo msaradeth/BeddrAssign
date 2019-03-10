@@ -16,7 +16,6 @@ class BluetoothManager: NSObject {
     static let shared = BluetoothManager()
     
     // MARK: - Observer Properties
-    var btCharacteristic: BtCharacteristic
     public var subject: BluetoothSubject
     public var btState: BtState {
         didSet {
@@ -39,6 +38,7 @@ class BluetoothManager: NSObject {
 
     // MARK: helper properties
     fileprivate var btParseReponse: BtParseReponse!
+    fileprivate var btCharacteristic: BtCharacteristic
     
     override init() {
         //Init Properties
