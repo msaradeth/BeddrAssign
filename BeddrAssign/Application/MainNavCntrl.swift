@@ -13,13 +13,14 @@ import RxSwift
 
 class MainNavCntrl: UINavigationController {
     let disposeBag = DisposeBag()
+    let subject = BluetoothManager.shared.subject
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         navigationBar.prefersLargeTitles = true
-        BluetoothManager.shared.subjectBtState.asObservable()
+        subject.btState.asObservable()
             .subscribe(onNext: { [weak self] (btStatus) in
                 self?.displayBtState(btStatus: btStatus)
             })
