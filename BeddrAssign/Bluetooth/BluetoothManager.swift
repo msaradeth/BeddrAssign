@@ -23,7 +23,7 @@ class BluetoothManager: NSObject {
     
     // MARK: - Observer Properties
     var btCharistic: BtCharacteristic
-    public var subject: BluetoothSubjects
+    public var subject: BluetoothSubject
     public var btState: BtState {
         didSet {
             subject.btState.onNext(btState)
@@ -50,10 +50,10 @@ class BluetoothManager: NSObject {
         btState = .unknown
         devices = []
         btCharistic = BtCharacteristic()
-        subject = BluetoothSubjects()
+        subject = BluetoothSubject()
         
         super.init()
-        btParseReponse = BtParseReponse(btServices: self)
+        btParseReponse = BtParseReponse(btService: self)
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: true)])
         if let centralManager = centralManager, centralManager.state == .poweredOn {
             btState = .poweredOn
@@ -68,7 +68,7 @@ class BluetoothManager: NSObject {
 
 
 // MARK: - Protocol for BtSerivces
-extension BluetoothManager: BtSerivces {
+extension BluetoothManager: BluetoothService {
     
     func write(data: Data) {
         guard let peripheralInstance = self.peripheralInstance,

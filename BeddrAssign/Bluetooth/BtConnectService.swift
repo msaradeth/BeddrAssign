@@ -13,7 +13,7 @@ import CoreBluetooth
 class BtConnectService: BluetoothManager {
     let disposeBag = DisposeBag()
 
-    func requestConnection(peripheral: CBPeripheral, btService: BtSerivces) -> Observable<BtState> {
+    func requestConnection(peripheral: CBPeripheral, btService: BluetoothService) -> Observable<BtState> {
         return Observable.create({ [unowned self] (observer) -> Disposable in
             btService.connect(peripheral: peripheral)
             btService.subject.btState.asObservable()

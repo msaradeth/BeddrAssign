@@ -50,7 +50,7 @@ class ListDeviceHeaderVC: UIViewController {
                 this.tableView.deselectRow(at: indexPath!, animated: true)
                 this.viewModel.connect(peripheral: deviceHeader.peripheral, completion: { (btState) in
                     if btState == .connected {
-                        let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", btService: this.viewModel.btServices)
+                        let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", btService: this.viewModel.btService)
                         this.navigationController?.pushViewController(deviceDetailVC, animated: true)
                     }
                 })

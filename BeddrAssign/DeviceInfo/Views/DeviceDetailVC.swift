@@ -19,12 +19,12 @@ class DeviceDetailVC: UIViewController {
     @IBOutlet weak var batteryLabel: UILabel!
     
     let disposeBag = DisposeBag()
-    var btService: BtSerivces?
-    var subject: BluetoothSubjects? {
+    var btService: BluetoothService?
+    var subject: BluetoothSubject? {
         return btService?.subject
     }
     
-    static func createWith(title: String, btService: BtSerivces?) -> DeviceDetailVC {
+    static func createWith(title: String, btService: BluetoothService?) -> DeviceDetailVC {
         let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
         vc.title = title
         vc.btService = btService

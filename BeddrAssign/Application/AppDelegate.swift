@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //Setup App Entry Point  
-        let viewModel = ListViewModel(btServices: btManager, btConnectService: BtConnectService())
+        let viewModel = ListViewModel(btService: btManager, btConnectService: BtConnectService())
         let vc = ListDeviceHeaderVC.createWith(title: "Sleep Tuner", viewModel: viewModel)
         let navCntrl = MainNavCntrl.init(rootViewController: vc)
         

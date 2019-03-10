@@ -1,5 +1,5 @@
 //
-//  BtServices.swift
+//  BluetoothService.swift
 //  BeddrAssign
 //
 //  Created by Mike Saradeth on 3/9/19.
@@ -11,24 +11,24 @@ import CoreBluetooth
 import RxSwift
 
 
-struct BluetoothSubjects {
+struct BluetoothSubject {
     var btState: BehaviorSubject<BtState>
     var devices: BehaviorSubject<[DeviceHeader]>
-    var uniqueName: PublishSubject<String>
-    var battery: PublishSubject<String>
-    var deviceInfo: PublishSubject<String>
+    var uniqueName: BehaviorSubject<String>
+    var battery: BehaviorSubject<String>
+    var deviceInfo: BehaviorSubject<String>
     
     init() {
         btState = BehaviorSubject<BtState>(value: .unknown)
         devices = BehaviorSubject<[DeviceHeader]>(value: [])
-        uniqueName = PublishSubject<String>()
-        battery = PublishSubject<String>()
-        deviceInfo = PublishSubject<String>()
+        uniqueName = BehaviorSubject<String>(value: "")
+        battery = BehaviorSubject<String>(value: "")
+        deviceInfo = BehaviorSubject<String>(value: "")
     }
 }
 
-protocol BtSerivces {
-    var subject: BluetoothSubjects { get set }
+protocol BluetoothService {
+    var subject: BluetoothSubject { get set }
     var btState: BtState { get set }
     
     func write(data: Data)

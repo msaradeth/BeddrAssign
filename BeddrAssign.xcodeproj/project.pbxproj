@@ -40,7 +40,7 @@
 		5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */; };
 		5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA280D22358DF50031F273 /* BtParseReponse.swift */; };
 		5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37412234DC2300154BE8 /* BtConnectService.swift */; };
-		5EFA37452234DE2300154BE8 /* BtServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37442234DE2300154BE8 /* BtServices.swift */; };
+		5EFA37452234DE2300154BE8 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37442234DE2300154BE8 /* BluetoothService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 		5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailVC.swift; sourceTree = "<group>"; };
 		5EFA280D22358DF50031F273 /* BtParseReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtParseReponse.swift; sourceTree = "<group>"; };
 		5EFA37412234DC2300154BE8 /* BtConnectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtConnectService.swift; sourceTree = "<group>"; };
-		5EFA37442234DE2300154BE8 /* BtServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtServices.swift; sourceTree = "<group>"; };
+		5EFA37442234DE2300154BE8 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		81EB72DB05E1013ACAFC90FB /* Pods-BeddrAssign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.debug.xcconfig"; sourceTree = "<group>"; };
 		C87C2986EF661271CDBF906E /* Pods-BeddrAssign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,7 +163,7 @@
 		5E21A9EE223582B70088A478 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				5EFA37442234DE2300154BE8 /* BtServices.swift */,
+				5EFA37442234DE2300154BE8 /* BluetoothService.swift */,
 				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
 				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
 				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
@@ -477,7 +477,7 @@
 				5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */,
 				5E21A9E322357C910088A478 /* BPM.swift in Sources */,
 				5E21A9E222357C910088A478 /* SlowNotification.swift in Sources */,
-				5EFA37452234DE2300154BE8 /* BtServices.swift in Sources */,
+				5EFA37452234DE2300154BE8 /* BluetoothService.swift in Sources */,
 				5E21A9DB22357C910088A478 /* RealtimeClock.swift in Sources */,
 				5E21A9E122357C910088A478 /* ChargingStatus.swift in Sources */,
 				5E21A9EB223580460088A478 /* Data+Ext.swift in Sources */,

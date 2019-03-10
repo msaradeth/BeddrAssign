@@ -11,13 +11,13 @@ import CoreBluetooth
 import RxSwift
 
 class BtParseReponse {
-    private var btServices: BtSerivces?
-    private var subject: BluetoothSubjects? {
-        return btServices?.subject
+    private var btService: BluetoothService?
+    private var subject: BluetoothSubject? {
+        return btService?.subject
     }
     
-    init(btServices: BtSerivces) {
-        self.btServices = btServices
+    init(btService: BluetoothService) {
+        self.btService = btService
     }
     
     func updateValueForCharacteristic(characteristic: CBCharacteristic) {
