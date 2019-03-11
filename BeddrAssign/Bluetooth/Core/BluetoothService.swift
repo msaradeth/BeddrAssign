@@ -15,7 +15,7 @@ protocol BluetoothService {
     var subject: BluetoothSubject { get set }
     var btState: BtState { get set }
     
-    func write(data: Data)
+    func write(cmdService: CommandService)
     func scanForPeripherals()
     func stopScan()
     func isScanning()  -> Bool

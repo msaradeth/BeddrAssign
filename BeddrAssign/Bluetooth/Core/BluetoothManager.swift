@@ -64,15 +64,24 @@ class BluetoothManager: NSObject {
 // MARK: - Protocol for BluetoothService
 extension BluetoothManager: BluetoothService {
     
-    func write(data: Data) {
+    func write(cmdService: CommandService) {
         guard let peripheralInstance = self.peripheralInstance,
-            let characteristicInstance = self.characteristicInstance else {
+            let characteristicInstance = self.characteristicInstance,
+            btState == .connected else {
+                cmdService.emitError(cmdStatus: .failed)
                 return
         }
-        if btState == .connected {
-            peripheralInstance.writeValue(data, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
-        }
+        peripheralInstance.writeValue(cmdService.outBuffer, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
         
+        //Check for retry or command timed out
+        DispatchQueue.main.async {
+            if cmdService.doRetry() {
+                cmdService.decrementNumberOfAttempt()
+                self.write(cmdService: cmdService)
+            }else if cmdService.timedout() {
+                cmdService.emitError(cmdStatus: .timedout)
+            }
+        }
     }
     
     func scanForPeripherals() {

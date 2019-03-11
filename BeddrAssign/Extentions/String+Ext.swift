@@ -10,6 +10,16 @@ import Foundation
 
 
 extension String {
+    func toData() -> Data {
+        var byteArr = [UInt8] (self.utf8)
+        let data = Data(bytes: &byteArr, count: byteArr.count)
+        return data
+    }
+}
+
+
+
+extension String {
     
     // get ASCI array
     
