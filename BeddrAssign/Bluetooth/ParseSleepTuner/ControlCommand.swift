@@ -22,6 +22,9 @@ enum ControlCommand: UInt8 {
     case cancelTest         = 11
     case calibrateSkin      = 12
 
-    var payload: Data { return Data(bytes: [rawValue]) }
+    var payload: Data {
+        let rawValues =  [rawValue]
+        return Data(bytes: rawValues)
+    }
 
 }
