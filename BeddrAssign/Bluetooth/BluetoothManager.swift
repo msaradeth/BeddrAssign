@@ -4,8 +4,6 @@
 //
 //  Created by Mike Saradeth on 3/8/19.
 //  Copyright © 2019 Mike Saradeth. All rights reserved.
-//
-
 
 import Foundation
 import CoreBluetooth
@@ -62,7 +60,6 @@ class BluetoothManager: NSObject {
 
 
 
-
 // MARK: - Protocol for BluetoothService
 extension BluetoothManager: BluetoothService {
     
@@ -71,7 +68,10 @@ extension BluetoothManager: BluetoothService {
             let characteristicInstance = self.characteristicInstance else {
                 return
         }
-        peripheralInstance.writeValue(data, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
+        if btState == .connected {
+            peripheralInstance.writeValue(data, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
+        }
+        
     }
     
     func scanForPeripherals() {
@@ -144,9 +144,10 @@ extension BluetoothManager: CBCentralManagerDelegate {
         print("didConnect peripheral serviceUUID:  \(String(describing: serviceUUID))")
         
         // look for services of interest on peripheral
+        peripheral.delegate = self
+        peripheral.discoverServices([Uuid.service])
         peripheralInstance = peripheral
-        peripheralInstance?.delegate = self
-        peripheralInstance?.discoverServices([serviceUUID])
+        
     }
     
     // discover what peripheral devices OF INTEREST
@@ -169,7 +170,7 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         print("didDiscoverServices peripheral:  \(peripheral)")
-        guard let myServices = peripheral.services?.filter({ $0==serviceUUID }) else { return }
+        guard let myServices = peripheral.services?.filter({ $0.uuid == Uuid.service }) else { return }
         for service in myServices {
             peripheral.discoverCharacteristics(characteristicUUIDs, for: service)
         }
@@ -181,6 +182,7 @@ extension BluetoothManager: CBPeripheralDelegate {
         print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
+            print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
         }
     }
