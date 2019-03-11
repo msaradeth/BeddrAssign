@@ -37,6 +37,7 @@ class BluetoothManager: NSObject {
     // MARK: helper properties
     fileprivate var btParseReponse: BtParseReponse!
     fileprivate var btCharacteristic: BtCharacteristic
+    var autoConnect = false
     
     override init() {
         //Init Properties
@@ -128,6 +129,11 @@ extension BluetoothManager: CBCentralManagerDelegate {
                 let deviceHeader = DeviceHeader(shortName: peripheralName, peripheral: peripheral)
                 print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
                 devices.append(deviceHeader)
+                
+                if autoConnect == true {
+                    connect(peripheral: peripheral)
+                    autoConnect = false                    
+                }
             }
         }
     }
@@ -182,6 +188,7 @@ extension BluetoothManager: CBPeripheralDelegate {
         print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
+            peripheral.setNotifyValue(true, for: characteristic)
             print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
         }
