@@ -24,7 +24,6 @@ protocol BluetoothService {
 }
 
 
-
 struct BluetoothSubject {
     var btState: BehaviorSubject<BtState>
     var devices: BehaviorSubject<[DeviceHeader]>
@@ -32,6 +31,8 @@ struct BluetoothSubject {
     var battery: BehaviorSubject<String>
     var deviceInfo: BehaviorSubject<String>
     var btStatus: BehaviorSubject<String>
+    var slowNotifications: BehaviorSubject<String>
+    var uniqueId: BehaviorSubject<String>
     
     init() {
         btState = BehaviorSubject<BtState>(value: .unknown)
@@ -39,6 +40,8 @@ struct BluetoothSubject {
         uniqueName = BehaviorSubject<String>(value: "")
         battery = BehaviorSubject<String>(value: "")
         deviceInfo = BehaviorSubject<String>(value: "")
+        slowNotifications = BehaviorSubject<String>(value: "")
+        uniqueId = BehaviorSubject<String>(value: "")
         btStatus = BehaviorSubject<String>(value: "")
     }
 }

@@ -17,6 +17,7 @@ class DeviceDetailVC: UIViewController {
     @IBOutlet weak var deviceStatus: UILabel!
     @IBOutlet weak var deviceInfo: UILabel!
     @IBOutlet weak var batteryLabel: UILabel!
+    @IBOutlet weak var slowLabel: UILabel!
     
     let disposeBag = DisposeBag()
     var btService: BluetoothService?
@@ -45,6 +46,10 @@ class DeviceDetailVC: UIViewController {
             .bind(to: deviceNameLabel.rx.text)
             .disposed(by: disposeBag)
         
+        subject.uniqueId.asObservable()
+            .bind(to: deviceIdLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         subject.btStatus.asObservable()
             .bind(to: deviceStatus.rx.text)
             .disposed(by: disposeBag)
@@ -53,9 +58,12 @@ class DeviceDetailVC: UIViewController {
             .bind(to: deviceInfo.rx.text)
             .disposed(by: disposeBag)
 
+        subject.slowNotifications.asObservable()
+            .bind(to: slowLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         subject.battery.asObservable()
             .bind(to: batteryLabel.rx.text)
             .disposed(by: disposeBag)
-        
     }
 }

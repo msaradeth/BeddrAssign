@@ -16,6 +16,8 @@ struct BtCharacteristic {
     var uniqueName: CBCharacteristic?
     var battery: CBCharacteristic?
     var deviceInfo: CBCharacteristic?
+    var uniqueId: CBCharacteristic?
+    var slowNotifications: CBCharacteristic?
     
     mutating func updateDiscoverCharacteristic(characteristic: CBCharacteristic) {
         switch characteristic.uuid {
@@ -25,13 +27,16 @@ struct BtCharacteristic {
             battery = characteristic
         case Uuid.info:
             deviceInfo = characteristic
+        case Uuid.uniqueId:
+            uniqueId = characteristic
+        case Uuid.slowNotifications:
+            slowNotifications = characteristic
         default:
             break
         }
     }
     
     func getCharacteristicUUIDs() -> [CBUUID] {
-        return [Uuid.control, Uuid.slowNotifications, Uuid.upload, Uuid.info, Uuid.battery, Uuid.uniqueName, Uuid.uniqueId, Uuid.realtimeClock, Uuid.debugOut, Uuid.debugIn,Uuid.tunerCharging]
-
+        return [Uuid.info, Uuid.battery, Uuid.uniqueName, Uuid.uniqueId, Uuid.slowNotifications]
     }
 }

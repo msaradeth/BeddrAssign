@@ -15,17 +15,15 @@ struct DeviceHeader {
     var uuidString: String {
         return peripheral?.identifier.uuidString ?? ""
     }
-    var deviceDetail: DeviceDetail?
     var peripheral: CBPeripheral?
     
-    init(shortName: String, peripheral: CBPeripheral? = nil, fullName: String? = nil, deviceDetail: DeviceDetail? = nil) {
+    init(shortName: String, peripheral: CBPeripheral? = nil, fullName: String? = nil) {
         self.shortName = shortName
         self.peripheral = peripheral
         self.fullName = fullName
-        self.deviceDetail = deviceDetail
     }
     
     init(shortName: String, peripheral: CBPeripheral?) {
-        self.init(shortName: shortName, peripheral: peripheral, fullName: nil, deviceDetail: nil)
+        self.init(shortName: shortName, peripheral: peripheral, fullName: nil)
     }
 }

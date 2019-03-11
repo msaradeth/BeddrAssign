@@ -132,7 +132,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
                 
                 if autoConnect == true {
                     connect(peripheral: peripheral)
-                    autoConnect = false                    
+                    autoConnect = false
                 }
             }
         }
@@ -189,8 +189,8 @@ extension BluetoothManager: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
             peripheral.setNotifyValue(true, for: characteristic)
-            print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
+            print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
         }
     }
     
