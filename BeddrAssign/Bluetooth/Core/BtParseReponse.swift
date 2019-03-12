@@ -15,11 +15,11 @@ class BtParseReponse {
     private var subject: BluetoothSubject? {
         return btService?.subject
     }
-    private var cmdService: CommandService
+    private var sendCommand: SendCommand?
     
-    init(btService: BluetoothService, cmdService: CommandService) {
+    init(btService: BluetoothService, sendCommand: SendCommand?) {
         self.btService = btService
-        self.cmdService = cmdService
+        self.sendCommand = sendCommand
     }
     
     func updateValueForCharacteristic(characteristic: CBCharacteristic) {
@@ -28,33 +28,30 @@ class BtParseReponse {
         switch characteristic.uuid {
         case Uuid.uniqueName:
             subject.uniqueName.onNext(DeviceName(characteristic: characteristic).name)
-            cmdService.emitCompleted()
             print("[BEDDR][parsing uniqueName]")
             
         case Uuid.uniqueId:
             let uniqueId = UniqueID(characteristic: characteristic).id
             subject.uniqueId.onNext(uniqueId)
-            cmdService.emitCompleted()
             print("[BEDDR][parsing uniqueId]")
             
         case Uuid.slowNotifications:
             guard let percents = BPM(characteristic).percents else { return }
             subject.slowNotifications.onNext(String(percents))
-            cmdService.emitCompleted()
             print("[BEDDR][parsing slowNotifications]  \(String(percents))")
             
         case Uuid.battery:
             subject.battery.onNext(Battery(characteristic: characteristic).description)
-            cmdService.emitCompleted()
-//            print("[BEDDR][parsing battery]")
             
         case Uuid.info:
             subject.deviceInfo.onNext(Version(characteristic).fwString)
-            cmdService.emitCompleted()
             print("[BEDDR][parsing fwString]")
             
         default:
             break
         }
+        
+        //Can also store the response to sendCommand.response rather than publishing using subjects in BluetoothManager (another design option)
+        sendCommand?.emitEvent(cmdStatus: .completed)
     }
 }

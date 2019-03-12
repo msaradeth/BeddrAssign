@@ -12,8 +12,8 @@ import UIKit
 extension UIStoryboard {
     public static func createWith(storyBoard: String, withIdentifier: String) -> UIViewController {
         let vc = UIStoryboard.init(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: withIdentifier)
-        let btState = BluetoothManager.shared.btState.description()
-        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: btState, style: .plain, target: nil, action: nil)
+        let btStatus = BluetoothManager.shared.btStatus.description()
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: btStatus, style: .plain, target: nil, action: nil)
 //        vc.navigationItem.rightBarButtonItem?.isEnabled = false
         return vc
     }

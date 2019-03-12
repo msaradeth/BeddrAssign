@@ -13,9 +13,9 @@ import RxSwift
 
 protocol BluetoothService {
     var subject: BluetoothSubject { get set }
-    var btState: BtState { get set }
+    var btStatus: BtStatus { get set }
     
-    func write(cmdService: CommandService)
+    func write(sendCommand: SendCommand)
     func scanForPeripherals()
     func stopScan()
     func isScanning()  -> Bool
@@ -25,23 +25,21 @@ protocol BluetoothService {
 
 
 struct BluetoothSubject {
-    var btState: BehaviorSubject<BtState>
+    var btStatus: BehaviorSubject<BtStatus>
     var devices: BehaviorSubject<[DeviceHeader]>
     var uniqueName: BehaviorSubject<String>
     var battery: BehaviorSubject<String>
     var deviceInfo: BehaviorSubject<String>
-    var btStatus: BehaviorSubject<String>
     var slowNotifications: BehaviorSubject<String>
     var uniqueId: BehaviorSubject<String>
     
     init() {
-        btState = BehaviorSubject<BtState>(value: .unknown)
+        btStatus = BehaviorSubject<BtStatus>(value: .unknown)
         devices = BehaviorSubject<[DeviceHeader]>(value: [])
         uniqueName = BehaviorSubject<String>(value: "")
         battery = BehaviorSubject<String>(value: "")
         deviceInfo = BehaviorSubject<String>(value: "")
         slowNotifications = BehaviorSubject<String>(value: "")
         uniqueId = BehaviorSubject<String>(value: "")
-        btStatus = BehaviorSubject<String>(value: "")
     }
 }

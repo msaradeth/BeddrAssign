@@ -20,14 +20,14 @@ class MainNavCntrl: UINavigationController {
 
         // Do any additional setup after loading the view.
         navigationBar.prefersLargeTitles = true
-        subject.btState.asObservable()
+        subject.btStatus.asObservable()
             .subscribe(onNext: { [weak self] (btStatus) in
-                self?.displayBtState(btStatus: btStatus)
+                self?.displayBtStatusDescription(btStatus: btStatus)
             })
             .disposed(by: disposeBag)
     }
     
-    func displayBtState(btStatus: BtState) {
+    func displayBtStatusDescription(btStatus: BtStatus) {
         for viewController in viewControllers {
             DispatchQueue.main.async {
                 viewController.navigationItem.rightBarButtonItem?.title = btStatus.description()

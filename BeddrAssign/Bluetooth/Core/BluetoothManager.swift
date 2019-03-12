@@ -15,10 +15,9 @@ class BluetoothManager: NSObject {
     
     // MARK: - Observer Properties
     public var subject: BluetoothSubject
-    public var btState: BtState {
+    public var btStatus: BtStatus {
         didSet {
-            subject.btState.onNext(btState)
-            subject.btStatus.onNext(btState.description())
+            subject.btStatus.onNext(btStatus)
         }
     }
     public var devices: [DeviceHeader] {
@@ -37,24 +36,25 @@ class BluetoothManager: NSObject {
     // MARK: helper properties
     fileprivate var btParseReponse: BtParseReponse!
     fileprivate var btCharacteristic: BtCharacteristic
+    fileprivate var sendCommand: SendCommand?
     var autoConnect = false
     
     override init() {
         //Init Properties
-        btState = .unknown
+        btStatus = .unknown
         devices = []
         btCharacteristic = BtCharacteristic()
         subject = BluetoothSubject()
         characteristicUUIDs = btCharacteristic.getCharacteristicUUIDs()
         
         super.init()
-        btParseReponse = BtParseReponse(btService: self)
+        btParseReponse = BtParseReponse(btService: self, sendCommand: sendCommand)
         centralManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey: NSNumber(value: true)])
         if let centralManager = centralManager, centralManager.state == .poweredOn {
-            btState = .poweredOn
+            btStatus = .poweredOn
             scanForPeripherals()
         }else {
-            btState = .poweredOff
+            btStatus = .poweredOff
         }
     }
 }
@@ -64,22 +64,23 @@ class BluetoothManager: NSObject {
 // MARK: - Protocol for BluetoothService
 extension BluetoothManager: BluetoothService {
     
-    func write(cmdService: CommandService) {
+    func write(sendCommand: SendCommand) {
         guard let peripheralInstance = self.peripheralInstance,
             let characteristicInstance = self.characteristicInstance,
-            btState == .connected else {
-                cmdService.emitError(cmdStatus: .failed)
+            btStatus == .connected else {
+                sendCommand.emitEvent(cmdStatus: .failed)
                 return
         }
-        peripheralInstance.writeValue(cmdService.outBuffer, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
+        self.sendCommand = sendCommand     
+        peripheralInstance.writeValue(sendCommand.outBuffer, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
         
-        //Check for retry or command timed out
-        DispatchQueue.main.async {
-            if cmdService.doRetry() {
-                cmdService.decrementNumberOfAttempt()
-                self.write(cmdService: cmdService)
-            }else if cmdService.timedout() {
-                cmdService.emitError(cmdStatus: .timedout)
+        //Handle retry or command timed out
+        DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
+            if sendCommand.doRetry() {
+                sendCommand.decrementNumberOfAttempt()
+                self.write(sendCommand: sendCommand)
+            }else if sendCommand.timedout() {
+                sendCommand.emitEvent(cmdStatus: .timedout)
             }
         }
     }
@@ -96,7 +97,7 @@ extension BluetoothManager: BluetoothService {
     }
     public func connect(peripheral: CBPeripheral?) {
         guard let peripheralInstance = peripheral else {
-            btState = .invalidData
+            btStatus = .invalidData
             return
         }
         self.peripheralInstance = peripheralInstance
@@ -104,7 +105,7 @@ extension BluetoothManager: BluetoothService {
     }
     public func disconnect() {
         guard let peripheral = peripheralInstance else {
-            btState = .invalidData
+            btStatus = .invalidData
             return
         }
         centralManager?.cancelPeripheralConnection(peripheral)
@@ -120,10 +121,10 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
-            btState = .poweredOn
+            btStatus = .poweredOn
             scanForPeripherals()
         case .poweredOff:
-            btState = .poweredOff
+            btStatus = .poweredOff
 
         default:
             break
@@ -151,12 +152,11 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // we can only move forwards when we know the connection
     // to the peripheral succeeded
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        btState = .connected
+        btStatus = .connected
         if isScanning() {
             stopScan()
         }
-        print("didConnect peripheral:  \(String(describing: peripheral))")
-        print("didConnect peripheral serviceUUID:  \(String(describing: serviceUUID))")
+        print("didConnect peripheral serviceUUID:  \(String(describing: serviceUUID))  \(String(describing: peripheral))")
         
         // look for services of interest on peripheral
         peripheral.delegate = self
@@ -168,11 +168,11 @@ extension BluetoothManager: CBCentralManagerDelegate {
     // discover what peripheral devices OF INTEREST
     // are available for this app to connect to
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        btState = .disconnected
+        btStatus = .disconnected
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        btState = .failToConnect
+        btStatus = .failToConnect
     }
 
 

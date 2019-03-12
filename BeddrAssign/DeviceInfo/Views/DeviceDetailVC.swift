@@ -14,33 +14,29 @@ import CoreBluetooth
 class DeviceDetailVC: UIViewController {
     @IBOutlet weak var deviceNameLabel: UILabel!
     @IBOutlet weak var deviceIdLabel: UILabel!
-    @IBOutlet weak var deviceStatus: UILabel!
     @IBOutlet weak var deviceInfo: UILabel!
     @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var slowLabel: UILabel!
     
-    let disposeBag = DisposeBag()
-    var btService: BluetoothService?
-    var subject: BluetoothSubject? {
-        return btService?.subject
-    }
+    fileprivate let disposeBag = DisposeBag()
+    var viewModel: DetailViewModel!
     
-    static func createWith(title: String, btService: BluetoothService?) -> DeviceDetailVC {
+    static func createWith(title: String, viewModel: DetailViewModel) -> DeviceDetailVC {
         let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
         vc.title = title
-        vc.btService = btService
+        vc.viewModel = viewModel
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         setupRx()
+        viewModel.sendCommands()
     }
     
     func setupRx() {
-        guard let subject = self.subject else { return }
+        guard let subject = viewModel.subject else { return }
         
         subject.uniqueName.asObservable()
             .bind(to: deviceNameLabel.rx.text)
@@ -48,10 +44,6 @@ class DeviceDetailVC: UIViewController {
         
         subject.uniqueId.asObservable()
             .bind(to: deviceIdLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        subject.btStatus.asObservable()
-            .bind(to: deviceStatus.rx.text)
             .disposed(by: disposeBag)
         
         subject.deviceInfo.asObservable()
@@ -65,5 +57,6 @@ class DeviceDetailVC: UIViewController {
         subject.battery.asObservable()
             .bind(to: batteryLabel.rx.text)
             .disposed(by: disposeBag)
+            
     }
 }

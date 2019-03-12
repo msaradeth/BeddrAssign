@@ -11,7 +11,7 @@ import RxSwift
 import CoreBluetooth
 
 class ListViewModel {
-    let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     var subjectDevices: BehaviorSubject<[DeviceHeader]>
     var btService: BluetoothService?
     var btConnectService: BtConnectService
@@ -22,22 +22,22 @@ class ListViewModel {
         self.subjectDevices = btService.subject.devices
     }
     
-    func connect(peripheral: CBPeripheral?, completion: @escaping (BtState) -> Void) {
+    func connect(peripheral: CBPeripheral?, completion: @escaping (BtStatus) -> Void) {
         disconnectIfConnected()
         guard let peripheral = peripheral, let btService = self.btService else {
             completion(.invalidData)
             return
         }
         btConnectService.requestConnection(peripheral: peripheral, btService: btService)
-            .subscribe(onNext: { btState in
-                completion(btState)
+            .subscribe(onNext: { btStatus in
+                completion(btStatus)
             })
             .disposed(by: disposeBag)
     }
     
     
     func disconnectIfConnected() {
-        if btService?.btState == .connected {
+        if btService?.btStatus == .connected {
             btService?.disconnect()
         }
     }

@@ -12,7 +12,7 @@ import RxCocoa
 
 class ListDeviceHeaderVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     var viewModel: ListViewModel!
     
     static func createWith(title: String, viewModel: ListViewModel) -> ListDeviceHeaderVC {
@@ -48,9 +48,10 @@ class ListDeviceHeaderVC: UIViewController {
                 guard let this = self else { return }
                 let indexPath = this.tableView.indexPathForSelectedRow
                 this.tableView.deselectRow(at: indexPath!, animated: true)
-                this.viewModel.connect(peripheral: deviceHeader.peripheral, completion: { (btState) in
-                    if btState == .connected {
-                        let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", btService: this.viewModel.btService)
+                this.viewModel.connect(peripheral: deviceHeader.peripheral, completion: { (btStatus) in
+                    if btStatus == .connected {
+                        let detailViewModel = DetailViewModel(btService: this.viewModel.btService)
+                        let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", viewModel: detailViewModel)
                         this.navigationController?.pushViewController(deviceDetailVC, animated: true)
                     }
                 })

@@ -1,5 +1,5 @@
 //
-//  BtState.swift
+//  BtStatus.swift
 //  BeddrAssign
 //
 //  Created by Mike Saradeth on 3/9/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-public enum BtState {
+public enum BtStatus {
     case connected
     case connecting
     case failToConnect
@@ -42,4 +42,14 @@ public enum BtState {
             return ""
         }
     }
+}
+
+
+enum CommandStatus: Error {
+    case pending
+    case completed
+    case failed
+    case timedout
+    case parseError
+    case cancel
 }
