@@ -14,6 +14,8 @@ import RxSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    //Instantiates BluetooghManager instance
     let btManager = BluetoothManager.shared
 
 

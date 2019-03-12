@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 
+// MainNavCntrl - Dynamically displays bluetooth status to ViewControllers
 
 class MainNavCntrl: UINavigationController {
     let disposeBag = DisposeBag()
@@ -27,12 +28,13 @@ class MainNavCntrl: UINavigationController {
             .disposed(by: disposeBag)
     }
     
+    
+    // Interate through each ViewControllers and display bluetooth status
     func displayBtStatusDescription(btStatus: BtStatus) {
         for viewController in viewControllers {
             DispatchQueue.main.async {
                 viewController.navigationItem.rightBarButtonItem?.title = btStatus.description()
             }
-            
         }
     }
 }
