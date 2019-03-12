@@ -32,7 +32,6 @@ class DeviceDetailVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupRx()
-
     }
     
     func setupRx() {
@@ -60,6 +59,6 @@ class DeviceDetailVC: UIViewController {
     }
     
     deinit {
-        print("DetailViewModel deinit")
+        print("DeviceDetailVC deinit")
     }
 }
