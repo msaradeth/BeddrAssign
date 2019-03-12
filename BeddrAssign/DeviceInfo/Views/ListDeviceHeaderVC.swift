@@ -37,8 +37,8 @@ class ListDeviceHeaderVC: UIViewController {
     func setupRx() {
         viewModel.subjectDevices.asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { (row, item, cell) in
-                cell.textLabel?.text = item.uuidString
-                cell.detailTextLabel?.text = item.shortName
+                cell.textLabel?.text = item.name
+                cell.detailTextLabel?.text = item.uuidString
             }
             .disposed(by: disposeBag)
         

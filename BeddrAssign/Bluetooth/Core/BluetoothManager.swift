@@ -134,9 +134,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         guard let peripheralName = peripheral.name else { return }
         //If is Sleep Tuner and not in devices list, add it to the list
-        if peripheralName == "SleepTun" {
+//        if peripheralName == "SleepTun" {
             if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-                let deviceHeader = DeviceHeader(shortName: peripheralName, peripheral: peripheral)
+                let deviceHeader = DeviceHeader(name: peripheralName, peripheral: peripheral)
                 print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
                 devices.append(deviceHeader)
                 
@@ -145,7 +145,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
                     autoConnect = false
                 }
             }
-        }
+//        }
     }
     
     // "Invoked when a connection is successfully created with a peripheral."
@@ -197,7 +197,12 @@ extension BluetoothManager: CBPeripheralDelegate {
         print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
-            peripheral.setNotifyValue(true, for: characteristic)
+            if characteristic.properties.contains(.read) && characteristic.uuid != Uuid.realtimeClock {
+                peripheral.readValue(for: characteristic)
+            }
+            if characteristic.properties.contains(.notify) {
+                peripheral.setNotifyValue(true, for: characteristic)
+            }
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
             print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
         }

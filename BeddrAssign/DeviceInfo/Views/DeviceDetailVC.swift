@@ -34,10 +34,6 @@ class DeviceDetailVC: UIViewController {
         setupRx()
 
     }
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.prepCommands()
-        viewModel.sendCommands()
-    }
     
     func setupRx() {
         guard let subject = viewModel.subject else { return }
@@ -61,6 +57,9 @@ class DeviceDetailVC: UIViewController {
         subject.battery.asObservable()
             .bind(to: batteryLabel.rx.text)
             .disposed(by: disposeBag)
-            
+    }
+    
+    deinit {
+        print("DetailViewModel deinit")
     }
 }

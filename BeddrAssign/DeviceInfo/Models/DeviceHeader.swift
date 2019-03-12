@@ -10,20 +10,15 @@ import Foundation
 import CoreBluetooth
 
 struct DeviceHeader {
-    var shortName:String
-    var fullName: String?
+    var name:String
     var uuidString: String {
         return peripheral?.identifier.uuidString ?? ""
     }
     var peripheral: CBPeripheral?
     
-    init(shortName: String, peripheral: CBPeripheral? = nil, fullName: String? = nil) {
-        self.shortName = shortName
+    init(name: String, peripheral: CBPeripheral? = nil) {
+        self.name = name
         self.peripheral = peripheral
-        self.fullName = fullName
     }
     
-    init(shortName: String, peripheral: CBPeripheral?) {
-        self.init(shortName: shortName, peripheral: peripheral, fullName: nil)
-    }
 }
