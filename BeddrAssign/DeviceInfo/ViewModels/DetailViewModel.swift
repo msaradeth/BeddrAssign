@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-
+import CoreBluetooth
 
 class DetailViewModel {
     let bag = DisposeBag()
@@ -16,22 +16,31 @@ class DetailViewModel {
     var subject: BluetoothSubject? {
         return btService?.subject
     }
+    var deviceInfo: DeviceInfo
     var commands: [SendCommand]
     
-    init(btService: BluetoothService?) {
+    init(btService: BluetoothService?, deviceInfo: DeviceInfo) {
         self.btService = btService
-
+        self.deviceInfo = deviceInfo
         commands = []
     }
+    
+    func toggleNotification(characteristic: CBCharacteristic)  {
+        if characteristic.isNotifying {
+            deviceInfo.peripheral?.setNotifyValue(false, for: characteristic)
+        }else {
+            deviceInfo.peripheral?.setNotifyValue(true, for: characteristic)
+        }
+    }
+
+    
     
     func sendCommands() {
         guard commands.count > 0 else { return }
         
         let command = commands.removeFirst()
         command.subject.asObservable()
-            .subscribe(onNext: { (cmdStatus) in
-                print(cmdStatus)
-            }, onError: { (error) in
+            .subscribe(onError: { (error) in
                 print("onError:  \(error)")
                 self.sendCommands()
             }, onCompleted: {

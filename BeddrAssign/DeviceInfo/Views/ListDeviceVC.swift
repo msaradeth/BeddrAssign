@@ -44,13 +44,13 @@ class ListDeviceVC: UIViewController {
         
         tableView.rx
             .modelSelected(DeviceInfo.self)
-            .subscribe(onNext: { [weak self] deviceHeader in
+            .subscribe(onNext: { [weak self] deviceInfo in
                 guard let this = self else { return }
                 let indexPath = this.tableView.indexPathForSelectedRow
                 this.tableView.deselectRow(at: indexPath!, animated: true)
-                this.viewModel.connect(peripheral: deviceHeader.peripheral, completion: { (btStatus) in
+                this.viewModel.connect(peripheral: deviceInfo.peripheral, completion: { (btStatus) in
                     if btStatus == .connected {
-                        let detailViewModel = DetailViewModel(btService: this.viewModel.btService)
+                        let detailViewModel = DetailViewModel(btService: this.viewModel.btService, deviceInfo: deviceInfo)
                         let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", viewModel: detailViewModel)
                         this.navigationController?.pushViewController(deviceDetailVC, animated: true)
                     }
