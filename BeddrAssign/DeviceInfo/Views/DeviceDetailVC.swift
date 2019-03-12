@@ -11,6 +11,11 @@ import RxSwift
 import RxCocoa
 import CoreBluetooth
 
+// DeviceDetailVC:  Ownes DetailViewModel which should have everything it needs
+// Display detail information for selected device
+// Allows user to toggle notifications for Battery and SlowNotifications
+// Read data from UniqueID and Info characteristics
+
 class DeviceDetailVC: UIViewController {
     @IBOutlet weak var deviceNameLabel: UILabel!
     @IBOutlet weak var deviceIdLabel: UILabel!
@@ -21,6 +26,7 @@ class DeviceDetailVC: UIViewController {
     fileprivate let disposeBag = DisposeBag()
     var viewModel: DetailViewModel!
     
+    // Inject need objects used by this view controller
     static func createWith(title: String, viewModel: DetailViewModel) -> DeviceDetailVC {
         let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "DeviceDetailVC") as! DeviceDetailVC
         vc.title = title
@@ -30,10 +36,16 @@ class DeviceDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Bind data to views
         setupRx()
+        
+        //Read Values
+        DispatchQueue.main.async {
+            self.viewModel.readValues()
+        }
     }
     
+    // Bind data to views
     func setupRx() {
         guard let subject = viewModel.subject else { return }
         
@@ -58,6 +70,7 @@ class DeviceDetailVC: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    // Toggles notifications
     @IBAction func toggleSlowNotification(_ sender: Any) {
         viewModel.toggleNotification(characteristic: viewModel.btCharacteristic?.slowNotifications)
     }

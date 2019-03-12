@@ -9,6 +9,7 @@
 import Foundation
 import CoreBluetooth
 
+// Contains device discovered
 struct DeviceInfo {
     var name:String
     var uuidString: String {

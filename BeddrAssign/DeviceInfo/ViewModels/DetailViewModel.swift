@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 import CoreBluetooth
 
+// DetailViewModel - owns BluetoothService (an interface to Bluetooth Manager)
+// 1.  Toggles given characteristic notification setting
+// 2.  Reads data for characteristic
+
 class DetailViewModel {
     let bag = DisposeBag()
     var btService: BluetoothService?
@@ -20,14 +24,24 @@ class DetailViewModel {
         return btService?.btCharacteristic
     }
     var deviceInfo: DeviceInfo
-    var commands: [SendCommand]
     
     init(btService: BluetoothService?, deviceInfo: DeviceInfo) {
         self.btService = btService
         self.deviceInfo = deviceInfo
-        commands = []
     }
     
+    // Read values for selected characteristics
+    func readValues() {
+        var characteristics = [CBCharacteristic]()
+        if let characteristic = btCharacteristic?.uniqueId { characteristics.append(characteristic) }
+        if let characteristic = btCharacteristic?.deviceInfo { characteristics.append(characteristic) }
+        for characteristic in characteristics {
+            deviceInfo.peripheral?.readValue(for: characteristic)
+        }
+    }
+    
+    
+    // Toggles notification
     func toggleNotification(characteristic: CBCharacteristic?)  {
         guard let characteristic = characteristic else { return }
         if characteristic.isNotifying {
@@ -36,34 +50,7 @@ class DetailViewModel {
             deviceInfo.peripheral?.setNotifyValue(true, for: characteristic)
         }
     }
-
-    
-//    
-//    func sendCommands() {
-//        guard commands.count > 0 else { return }
-//        
-//        let command = commands.removeFirst()
-//        command.subject.asObservable()
-//            .subscribe(onError: { (error) in
-//                print("onError:  \(error)")
-//                self.sendCommands()
-//            }, onCompleted: {
-//                print("completed")
-//                self.sendCommands()
-//            })
-//            .disposed(by: bag)
-//        
-//        btService?.write(sendCommand: command)
-//    }
-//    
-//    func prepCommands() {
-//        let deviceNameCmd = SendCommand(data: Uuid.uniqueName.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
-//        let deviceIdCmd = SendCommand(data: Uuid.uniqueId.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
-//        let infoCmd = SendCommand(data: Uuid.info.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
-//        commands = [deviceNameCmd, deviceIdCmd, infoCmd]
-//    }
-    
-    
+  
     deinit {
         print("DetailViewModel deinit")
     }

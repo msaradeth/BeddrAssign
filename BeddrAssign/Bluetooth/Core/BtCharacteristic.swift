@@ -11,7 +11,8 @@ import CoreBluetooth
 
 
 
-
+// Store discovered characteristics
+// Owned by BluetoothManager
 struct BtCharacteristic {
     var uniqueName: CBCharacteristic?
     var battery: CBCharacteristic?

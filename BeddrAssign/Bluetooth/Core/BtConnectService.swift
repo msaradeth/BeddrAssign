@@ -10,6 +10,9 @@ import Foundation
 import RxSwift
 import CoreBluetooth
 
+
+// A service to connect to bluetooth
+// Emits bluetooth status to subscribers
 class BtConnectService: BluetoothManager {
     let disposeBag = DisposeBag()
 

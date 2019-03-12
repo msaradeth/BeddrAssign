@@ -9,6 +9,7 @@
 import Foundation
 
 
+// Available Bluetooth Status
 public enum BtStatus {
     case connected
     case connecting
@@ -45,6 +46,7 @@ public enum BtStatus {
 }
 
 
+// Error Codes
 enum CommandStatus: Error {
     case pending
     case completed

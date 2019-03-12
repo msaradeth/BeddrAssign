@@ -9,6 +9,10 @@ import Foundation
 import CoreBluetooth
 import RxSwift
 
+// Bluetooth Manager conforms to the following protocols:
+// 1. BluetoothService - An interface to Bluetooth Manager module
+// 2. CCBCentralManagerDelegate - client
+// 3. CBPeripheralDelegate - (server/datasource)
 
 class BluetoothManager: NSObject {
     static let shared = BluetoothManager()
@@ -67,22 +71,23 @@ extension BluetoothManager: BluetoothService {
         guard let peripheralInstance = self.peripheralInstance,
             let characteristic = sendCommand.characteristic,
             peripheralInstance.state == .connected else {
-                sendCommand.emitEvent(cmdStatus: .failed)
+//                sendCommand.emitEvent(cmdStatus: .failed)
                 return
         }
         self.sendCommand = sendCommand
         print("writing characteristic: \(characteristic.uuid)  dataString: \(sendCommand.dataToString)")
         peripheralInstance.writeValue(sendCommand.data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
         
-        //Handle retry or command timed out
-        DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
-            sendCommand.decrementNumberOfAttempt()
-            if sendCommand.doRetry() {                
-                self.write(sendCommand: sendCommand)
-            }else if sendCommand.timedout() {
-                sendCommand.emitEvent(cmdStatus: .timedout)
-            }
-        }
+        
+//        //Handle retry or command timed out
+//        DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
+//            sendCommand.decrementNumberOfAttempt()
+//            if sendCommand.doRetry() {
+//                self.write(sendCommand: sendCommand)
+//            }else if sendCommand.timedout() {
+//                sendCommand.emitEvent(cmdStatus: .timedout)
+//            }
+//        }
     }
     
     func scanForPeripherals() {
@@ -131,33 +136,25 @@ extension BluetoothManager: CBCentralManagerDelegate {
         }
     }
     
+    // discover what peripheral devices OF INTEREST are available for this app to connect to
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         guard let peripheralName = peripheral.name else { return }
         //If is Sleep Tuner and not in devices list, add it to the list
 //        if peripheralName == "SleepTun" {
-            if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-                let deviceHeader = DeviceInfo(name: peripheralName, peripheral: peripheral)
-                print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
-                devices.append(deviceHeader)
-                
-                if autoConnect == true {
-                    connect(peripheral: peripheral)
-                    autoConnect = false
-                }
-            }
-//        }
+        if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
+            let deviceHeader = DeviceInfo(name: peripheralName, peripheral: peripheral)
+            print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
+            devices.append(deviceHeader)
+        }
     }
     
     // "Invoked when a connection is successfully created with a peripheral."
-    // we can only move forwards when we know the connection
-    // to the peripheral succeeded
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         btStatus = .connected
         if isScanning() {
             stopScan()
         }
         print("didConnect peripheral serviceUUID:  \(String(describing: serviceUUID))  \(String(describing: peripheral))")
-        
         // look for services of interest on peripheral
         peripheral.delegate = self
         peripheral.discoverServices([Uuid.service])
@@ -165,8 +162,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
         
     }
     
-    // discover what peripheral devices OF INTEREST
-    // are available for this app to connect to
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         btStatus = .disconnected
     }
@@ -191,18 +186,21 @@ extension BluetoothManager: CBPeripheralDelegate {
         }
     }
     
-    // confirm we've discovered characteristics
-    // of interest within services of interest
+    // confirm we've discovered characteristics of interest within services of interest
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         print("didDiscoverCharacteristicsFor peripheral:  \(peripheral)")
         guard let characteristics = service.characteristics else { return }
         for characteristic in characteristics {
-            if characteristic.properties.contains(.read) && characteristic.uuid != Uuid.realtimeClock {
-                peripheral.readValue(for: characteristic)
+            if characteristic.uuid == Uuid.uniqueName {
+                peripheral.readValue(for: characteristic)   //Read uniqueName to display on first screen
             }
-            if characteristic.properties.contains(.notify) {
-                peripheral.setNotifyValue(true, for: characteristic)
-            }
+//            if characteristic.properties.contains(.read) && characteristic.uuid != Uuid.realtimeClock {
+//                peripheral.readValue(for: characteristic)
+//            }
+//            if characteristic.properties.contains(.notify) {
+//                peripheral.setNotifyValue(true, for: characteristic)
+//            }
+            
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
             print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
         }

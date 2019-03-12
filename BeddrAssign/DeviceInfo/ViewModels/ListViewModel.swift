@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 import CoreBluetooth
 
+// ListViewModel - owns Bluetooth Service and Connection Service
+// 1.  Request bluetooth connection
+// 2.  Disconnect from bluetooth if connnected when in this List Screen
+
 class ListViewModel {
     fileprivate let disposeBag = DisposeBag()
     var subjectDevices: BehaviorSubject<[DeviceInfo]>
@@ -28,6 +32,8 @@ class ListViewModel {
             completion(.invalidData)
             return
         }
+        
+        // Request connection and emit result to subscriber
         btConnectService.requestConnection(peripheral: peripheral, btService: btService)
             .subscribe(onNext: { btStatus in
                 completion(btStatus)

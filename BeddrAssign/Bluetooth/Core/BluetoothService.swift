@@ -11,6 +11,10 @@ import CoreBluetooth
 import RxSwift
 
 
+// An interface to Bluetooth Manager module
+// To be injected to any objects that wants to subscriber to observers or write to bluetooth
+// Contains observers, characteristics, bluetooth status and other bluetooth fuctionalities
+// BluetoothManager conforms to this protocol
 protocol BluetoothService {
     var subject: BluetoothSubject { get set }
     var btStatus: BtStatus { get set }
@@ -25,6 +29,8 @@ protocol BluetoothService {
 }
 
 
+// Observers for client (Objects or Views to subscriber to)
+// Own by BluetoothService protocol  
 struct BluetoothSubject {
     var btStatus: BehaviorSubject<BtStatus>
     var devices: BehaviorSubject<[DeviceInfo]>

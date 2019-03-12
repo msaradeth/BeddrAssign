@@ -11,6 +11,8 @@ import RxSwift
 import CoreBluetooth
 
 
+// This is not needed for now.
+// Container for data to be written to bluetooth
 protocol CommandService {
     var subject: PublishSubject<CommandStatus> { get set }
     var data: Data { get set }
@@ -79,6 +81,38 @@ class SendCommand: CommandService {
         subject.onCompleted()
     }
 }
+
+
+
+
+
+
+//
+//    func sendCommands() {
+//        guard commands.count > 0 else { return }
+//
+//        let command = commands.removeFirst()
+//        command.subject.asObservable()
+//            .subscribe(onError: { (error) in
+//                print("onError:  \(error)")
+//                self.sendCommands()
+//            }, onCompleted: {
+//                print("completed")
+//                self.sendCommands()
+//            })
+//            .disposed(by: bag)
+//
+//        btService?.write(sendCommand: command)
+//    }
+//
+
+
+//    func prepCommands() {
+//        let deviceNameCmd = SendCommand(data: Uuid.uniqueName.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
+//        let deviceIdCmd = SendCommand(data: Uuid.uniqueId.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
+//        let infoCmd = SendCommand(data: Uuid.info.toData(), characteristic: btService?.btCharacteristic.deviceInfo)
+//        commands = [deviceNameCmd, deviceIdCmd, infoCmd]
+//    }
 
 
 //var bytesData = [UInt8] (cmd.utf8)

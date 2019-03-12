@@ -35,7 +35,7 @@
 		5E3FE206223415BB00B2537F /* ListDeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */; };
 		5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */; };
 		5E3FE20B2234235700B2537F /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20A2234235700B2537F /* BluetoothManager.swift */; };
-		5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */; };
+		5E3FE21022342FBB00B2537F /* Enum+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* Enum+Core.swift */; };
 		5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */; };
 		5EE4EA4E223708FD00784DAF /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE4EA4D223708FD00784DAF /* Int+Ext.swift */; };
 		5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA280D22358DF50031F273 /* BtParseReponse.swift */; };
@@ -99,7 +99,7 @@
 		5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeviceVC.swift; sourceTree = "<group>"; };
 		5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		5E3FE20A2234235700B2537F /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+BtState.swift"; sourceTree = "<group>"; };
+		5E3FE20F22342FBB00B2537F /* Enum+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+Core.swift"; sourceTree = "<group>"; };
 		5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailVC.swift; sourceTree = "<group>"; };
 		5EE4EA4D223708FD00784DAF /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		5EFA280D22358DF50031F273 /* BtParseReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtParseReponse.swift; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 		5E21A9EE223582B70088A478 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				5E3CB11A223701C000B3DC2C /* Commands */,
 				5E3CB119223701A900B3DC2C /* Core */,
+				5E3CB11A223701C000B3DC2C /* Commands */,
 				5E21A9C922357C910088A478 /* ParseSleepTuner */,
 			);
 			path = Bluetooth;
@@ -186,7 +186,7 @@
 				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
 				5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */,
 				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
-				5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */,
+				5E3FE20F22342FBB00B2537F /* Enum+Core.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -526,7 +526,7 @@
 				5EFD0E0122374FA00054A38A /* SendCommand.swift in Sources */,
 				5E21A9DF22357C910088A478 /* UniqueID.swift in Sources */,
 				5EFD0E0522377D120054A38A /* UUID.swift in Sources */,
-				5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */,
+				5E3FE21022342FBB00B2537F /* Enum+Core.swift in Sources */,
 				5E21A9DA22357C910088A478 /* ControlCommand.swift in Sources */,
 				5E21A9E522357C910088A478 /* FastNotification.swift in Sources */,
 			);
@@ -695,7 +695,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QAJNW7456U;
+				DEVELOPMENT_TEAM = LP46D328FV;
 				INFOPLIST_FILE = BeddrAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -715,7 +715,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QAJNW7456U;
+				DEVELOPMENT_TEAM = LP46D328FV;
 				INFOPLIST_FILE = BeddrAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (

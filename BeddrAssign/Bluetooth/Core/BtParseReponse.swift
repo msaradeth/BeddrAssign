@@ -10,6 +10,9 @@ import Foundation
 import CoreBluetooth
 import RxSwift
 
+
+// Parse and emit reponses to interested subscribers
+// Owned by BluetoothManager
 class BtParseReponse {
     private var btService: BluetoothService?
     private var subject: BluetoothSubject? {
@@ -51,7 +54,8 @@ class BtParseReponse {
             break
         }
         
-        //Can also store the response to sendCommand.response rather than publishing using subjects in BluetoothManager (another design option)
-        sendCommand?.emitEvent(cmdStatus: .completed)
+        //Don't need at this time
+        //Can also store the response to sendCommand.response rather than emiting using subjects in BluetoothManager
+//        sendCommand?.emitEvent(cmdStatus: .completed)
     }
 }
