@@ -72,7 +72,7 @@ extension BluetoothManager: BluetoothService {
                 return
         }
         self.sendCommand = sendCommand     
-        peripheralInstance.writeValue(sendCommand.outBuffer, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
+        peripheralInstance.writeValue(sendCommand.data, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
         
         //Handle retry or command timed out
         DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {

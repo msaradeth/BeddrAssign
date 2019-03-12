@@ -12,7 +12,7 @@ import RxSwift
 
 protocol CommandService {
     var subjectCmdStatus: PublishSubject<CommandStatus> { get set }
-    var outBuffer: Data { get set }
+    var data: Data { get set }
     var numberOfSeconds: Double { get set }
     var numberOfAttempt: Int { get set }
     var cmdStatus: CommandStatus { get set }
@@ -29,7 +29,7 @@ protocol CommandService {
 
 class SendCommand: CommandService {
     var subjectCmdStatus: PublishSubject<CommandStatus>
-    var outBuffer: Data
+    var data: Data
     var numberOfSeconds: Double
     var numberOfAttempt: Int
     var cmdStatus: CommandStatus
@@ -37,7 +37,7 @@ class SendCommand: CommandService {
     var response: AnyObject?
     
     init(outBuffer: Data, numberOfAttempt: Int = 1, numberOfSeconds: Double = 5, src: String = "") {
-        self.outBuffer = outBuffer
+        self.data = outBuffer
         self.numberOfAttempt = numberOfAttempt
         self.numberOfSeconds = numberOfSeconds
         self.src = src
