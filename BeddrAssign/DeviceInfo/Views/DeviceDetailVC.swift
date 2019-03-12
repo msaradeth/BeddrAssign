@@ -58,6 +58,13 @@ class DeviceDetailVC: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    @IBAction func toggleSlowNotification(_ sender: Any) {
+        viewModel.toggleNotification(characteristic: viewModel.btCharacteristic?.slowNotifications)
+    }
+    @IBAction func toggleBatteryNotification(_ sender: Any) {
+        viewModel.toggleNotification(characteristic: viewModel.btCharacteristic?.battery)
+    }
+        
     deinit {
         print("DeviceDetailVC deinit")
     }
