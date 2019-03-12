@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Setup App Entry Point  
         let viewModel = ListViewModel(btService: btManager, btConnectService: BtConnectService())
-        let vc = ListDeviceHeaderVC.createWith(title: "Sleep Tuner", viewModel: viewModel)
+        let vc = ListDeviceVC.createWith(title: "Sleep Tuner", viewModel: viewModel)
         let navCntrl = MainNavCntrl.init(rootViewController: vc)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)

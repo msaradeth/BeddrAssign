@@ -10,13 +10,13 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ListDeviceHeaderVC: UIViewController {
+class ListDeviceVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     fileprivate let disposeBag = DisposeBag()
     var viewModel: ListViewModel!
     
-    static func createWith(title: String, viewModel: ListViewModel) -> ListDeviceHeaderVC {
-        let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "ListDeviceHeaderVC") as! ListDeviceHeaderVC
+    static func createWith(title: String, viewModel: ListViewModel) -> ListDeviceVC {
+        let vc = UIStoryboard.createWith(storyBoard: "BeddrDevices", withIdentifier: "ListDeviceHeaderVC") as! ListDeviceVC
         vc.viewModel = viewModel
         DispatchQueue.main.async {
             vc.navigationItem.title = title
@@ -43,7 +43,7 @@ class ListDeviceHeaderVC: UIViewController {
             .disposed(by: disposeBag)
         
         tableView.rx
-            .modelSelected(DeviceHeader.self)
+            .modelSelected(DeviceInfo.self)
             .subscribe(onNext: { [weak self] deviceHeader in
                 guard let this = self else { return }
                 let indexPath = this.tableView.indexPathForSelectedRow

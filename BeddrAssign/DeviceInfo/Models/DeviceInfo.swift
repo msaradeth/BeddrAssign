@@ -1,5 +1,5 @@
 //
-//  DeviceHeader.swift
+//  DeviceInfo.swift
 //  Assignment
 //
 //  Created by Mike Saradeth on 3/8/19.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-struct DeviceHeader {
+struct DeviceInfo {
     var name:String
     var uuidString: String {
         return peripheral?.identifier.uuidString ?? ""

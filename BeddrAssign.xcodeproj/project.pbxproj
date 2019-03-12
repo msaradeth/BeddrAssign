@@ -30,9 +30,9 @@
 		5E3FE1DD22340E3C00B2537F /* BeddrAssignUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1DC22340E3C00B2537F /* BeddrAssignUITests.swift */; };
 		5E3FE1EF22340F9800B2537F /* MainNavCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1EE22340F9800B2537F /* MainNavCntrl.swift */; };
 		5E3FE201223415BB00B2537F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1F8223415BA00B2537F /* ListViewModel.swift */; };
-		5E3FE203223415BB00B2537F /* DeviceHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FB223415BA00B2537F /* DeviceHeader.swift */; };
+		5E3FE203223415BB00B2537F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */; };
 		5E3FE204223415BB00B2537F /* BeddrDevices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FD223415BA00B2537F /* BeddrDevices.storyboard */; };
-		5E3FE206223415BB00B2537F /* ListDeviceHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FF223415BA00B2537F /* ListDeviceHeaderVC.swift */; };
+		5E3FE206223415BB00B2537F /* ListDeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */; };
 		5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */; };
 		5E3FE20B2234235700B2537F /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20A2234235700B2537F /* BluetoothManager.swift */; };
 		5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */; };
@@ -94,9 +94,9 @@
 		5E3FE1DE22340E3C00B2537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E3FE1EE22340F9800B2537F /* MainNavCntrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavCntrl.swift; sourceTree = "<group>"; };
 		5E3FE1F8223415BA00B2537F /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
-		5E3FE1FB223415BA00B2537F /* DeviceHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceHeader.swift; sourceTree = "<group>"; };
+		5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		5E3FE1FD223415BA00B2537F /* BeddrDevices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeddrDevices.storyboard; sourceTree = "<group>"; };
-		5E3FE1FF223415BA00B2537F /* ListDeviceHeaderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeviceHeaderVC.swift; sourceTree = "<group>"; };
+		5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeviceVC.swift; sourceTree = "<group>"; };
 		5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
 		5E3FE20A2234235700B2537F /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		5E3FE20F22342FBB00B2537F /* Enum+BtState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+BtState.swift"; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 		5E3FE1F9223415BA00B2537F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5E3FE1FB223415BA00B2537F /* DeviceHeader.swift */,
+				5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				5E3FE1FD223415BA00B2537F /* BeddrDevices.storyboard */,
-				5E3FE1FF223415BA00B2537F /* ListDeviceHeaderVC.swift */,
+				5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */,
 				5E3FE2112234380B00B2537F /* DeviceDetailVC.swift */,
 			);
 			path = Views;
@@ -500,7 +500,7 @@
 				5E21A9E022357C910088A478 /* Uuid.swift in Sources */,
 				5E3FE201223415BB00B2537F /* ListViewModel.swift in Sources */,
 				5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */,
-				5E3FE203223415BB00B2537F /* DeviceHeader.swift in Sources */,
+				5E3FE203223415BB00B2537F /* DeviceInfo.swift in Sources */,
 				5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */,
 				5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */,
 				5E21A9E322357C910088A478 /* BPM.swift in Sources */,
@@ -512,7 +512,7 @@
 				5E21A9DE22357C910088A478 /* Version.swift in Sources */,
 				5EFD0E0322375A610054A38A /* DetailViewModel.swift in Sources */,
 				5E3FE2122234380B00B2537F /* DeviceDetailVC.swift in Sources */,
-				5E3FE206223415BB00B2537F /* ListDeviceHeaderVC.swift in Sources */,
+				5E3FE206223415BB00B2537F /* ListDeviceVC.swift in Sources */,
 				5E21A9E422357C910088A478 /* Battery.swift in Sources */,
 				5E21A9DC22357C910088A478 /* ControlStatus.swift in Sources */,
 				5E21A9ED223580960088A478 /* String+Ext.swift in Sources */,

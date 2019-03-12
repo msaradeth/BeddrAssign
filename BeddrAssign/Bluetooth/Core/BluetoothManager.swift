@@ -20,7 +20,7 @@ class BluetoothManager: NSObject {
             subject.btStatus.onNext(btStatus)
         }
     }
-    public var devices: [DeviceHeader] {
+    public var devices: [DeviceInfo] {
         didSet {
             subject.devices.onNext(devices)
         }
@@ -136,7 +136,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
         //If is Sleep Tuner and not in devices list, add it to the list
 //        if peripheralName == "SleepTun" {
             if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-                let deviceHeader = DeviceHeader(name: peripheralName, peripheral: peripheral)
+                let deviceHeader = DeviceInfo(name: peripheralName, peripheral: peripheral)
                 print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
                 devices.append(deviceHeader)
                 
