@@ -8,10 +8,11 @@
 
 import Foundation
 import RxSwift
+import CoreBluetooth
 
 
 protocol CommandService {
-    var subjectCmdStatus: PublishSubject<CommandStatus> { get set }
+    var subject: PublishSubject<CommandStatus> { get set }
     var data: Data { get set }
     var numberOfSeconds: Double { get set }
     var numberOfAttempt: Int { get set }
@@ -28,21 +29,26 @@ protocol CommandService {
 
 
 class SendCommand: CommandService {
-    var subjectCmdStatus: PublishSubject<CommandStatus>
+    var subject: PublishSubject<CommandStatus>
+    var characteristic: CBCharacteristic?
     var data: Data
     var numberOfSeconds: Double
     var numberOfAttempt: Int
     var cmdStatus: CommandStatus
     var src: String
     var response: AnyObject?
+    var dataToString: String {
+        return String(decoding: data, as: UTF8.self)
+    }
     
-    init(outBuffer: Data, numberOfAttempt: Int = 1, numberOfSeconds: Double = 5, src: String = "") {
-        self.data = outBuffer
+    init(data: Data, characteristic: CBCharacteristic?, numberOfAttempt: Int = 2, numberOfSeconds: Double = 5, src: String = "") {
+        self.data = data
+        self.characteristic = characteristic
         self.numberOfAttempt = numberOfAttempt
         self.numberOfSeconds = numberOfSeconds
         self.src = src
         self.cmdStatus = .pending
-        subjectCmdStatus = PublishSubject<CommandStatus>()
+        subject = PublishSubject<CommandStatus>()
     }
     
     func doRetry() -> Bool {
@@ -61,16 +67,16 @@ class SendCommand: CommandService {
         self.cmdStatus = cmdStatus
         numberOfAttempt = 0
         if cmdStatus == .completed {
-            subjectCmdStatus.onCompleted()
+            subject.onCompleted()
         }else {
-            subjectCmdStatus.onError(cmdStatus)
+            subject.onError(cmdStatus)
         }
     }
     
     func cancelTask() {
         numberOfAttempt = 0
         cmdStatus = .cancel
-        subjectCmdStatus.onCompleted()
+        subject.onCompleted()
     }
 }
 

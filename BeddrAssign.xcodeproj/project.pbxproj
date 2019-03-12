@@ -44,6 +44,7 @@
 		5EFA37452234DE2300154BE8 /* BluetoothService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA37442234DE2300154BE8 /* BluetoothService.swift */; };
 		5EFD0E0122374FA00054A38A /* SendCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD0E0022374FA00054A38A /* SendCommand.swift */; };
 		5EFD0E0322375A610054A38A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD0E0222375A610054A38A /* DetailViewModel.swift */; };
+		5EFD0E0522377D120054A38A /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFD0E0422377D120054A38A /* UUID.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		5EFA37442234DE2300154BE8 /* BluetoothService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothService.swift; sourceTree = "<group>"; };
 		5EFD0E0022374FA00054A38A /* SendCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCommand.swift; sourceTree = "<group>"; };
 		5EFD0E0222375A610054A38A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		5EFD0E0422377D120054A38A /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		81EB72DB05E1013ACAFC90FB /* Pods-BeddrAssign.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.debug.xcconfig"; sourceTree = "<group>"; };
 		C87C2986EF661271CDBF906E /* Pods-BeddrAssign.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeddrAssign.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeddrAssign/Pods-BeddrAssign.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -302,6 +304,7 @@
 			children = (
 				5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */,
 				5E21A9EA223580460088A478 /* Data+Ext.swift */,
+				5EFD0E0422377D120054A38A /* UUID.swift */,
 				5E21A9EC223580960088A478 /* String+Ext.swift */,
 				5EE4EA4D223708FD00784DAF /* Int+Ext.swift */,
 			);
@@ -522,6 +525,7 @@
 				5E3FE1EF22340F9800B2537F /* MainNavCntrl.swift in Sources */,
 				5EFD0E0122374FA00054A38A /* SendCommand.swift in Sources */,
 				5E21A9DF22357C910088A478 /* UniqueID.swift in Sources */,
+				5EFD0E0522377D120054A38A /* UUID.swift in Sources */,
 				5E3FE21022342FBB00B2537F /* Enum+BtState.swift in Sources */,
 				5E21A9DA22357C910088A478 /* ControlCommand.swift in Sources */,
 				5E21A9E522357C910088A478 /* FastNotification.swift in Sources */,

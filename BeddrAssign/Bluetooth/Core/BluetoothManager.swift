@@ -28,14 +28,13 @@ class BluetoothManager: NSObject {
     
     // MARK: Bluetooth Properties
     fileprivate var centralManager: CBCentralManager?
-    fileprivate var characteristicInstance: CBCharacteristic?
     fileprivate var peripheralInstance: CBPeripheral?
     fileprivate let serviceUUID = Uuid.service
     fileprivate var characteristicUUIDs: [CBUUID]
 
     // MARK: helper properties
     fileprivate var btParseReponse: BtParseReponse!
-    fileprivate var btCharacteristic: BtCharacteristic
+    internal var btCharacteristic: BtCharacteristic
     fileprivate var sendCommand: SendCommand?
     var autoConnect = false
     
@@ -66,18 +65,19 @@ extension BluetoothManager: BluetoothService {
     
     func write(sendCommand: SendCommand) {
         guard let peripheralInstance = self.peripheralInstance,
-            let characteristicInstance = self.characteristicInstance,
-            btStatus == .connected else {
+            let characteristic = sendCommand.characteristic,
+            peripheralInstance.state == .connected else {
                 sendCommand.emitEvent(cmdStatus: .failed)
                 return
         }
-        self.sendCommand = sendCommand     
-        peripheralInstance.writeValue(sendCommand.data, for: characteristicInstance, type: CBCharacteristicWriteType.withResponse)
+        self.sendCommand = sendCommand
+        print("writing characteristic: \(characteristic.uuid)  dataString: \(sendCommand.dataToString)")
+        peripheralInstance.writeValue(sendCommand.data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
         
         //Handle retry or command timed out
         DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
-            if sendCommand.doRetry() {
-                sendCommand.decrementNumberOfAttempt()
+            sendCommand.decrementNumberOfAttempt()
+            if sendCommand.doRetry() {                
                 self.write(sendCommand: sendCommand)
             }else if sendCommand.timedout() {
                 sendCommand.emitEvent(cmdStatus: .timedout)
@@ -205,12 +205,17 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        NSLog("didWriteValueFor characteristice uuid: \(String(describing: characteristicInstance?.uuid))")
+        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.deviceInfo || characteristic.uuid == btCharacteristic.uniqueId {
+            NSLog("didWriteValueFors characteristice uuid: \(String(describing: characteristic.uuid))")
+        }
     }
     
     
     // MARK: Handle Bluetooth Reponses
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.deviceInfo || characteristic.uuid == btCharacteristic.uniqueId {
+            NSLog("didUpdateValueFor characteristice uuid: \(String(describing: characteristic.uuid))")
+        }
         btParseReponse.updateValueForCharacteristic(characteristic: characteristic)
     }
 }

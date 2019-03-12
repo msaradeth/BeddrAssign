@@ -14,6 +14,7 @@ import RxSwift
 protocol BluetoothService {
     var subject: BluetoothSubject { get set }
     var btStatus: BtStatus { get set }
+    var btCharacteristic: BtCharacteristic { get set }
     
     func write(sendCommand: SendCommand)
     func scanForPeripherals()

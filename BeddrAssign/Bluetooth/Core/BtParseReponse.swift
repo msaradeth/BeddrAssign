@@ -38,7 +38,7 @@ class BtParseReponse {
         case Uuid.slowNotifications:
             guard let percents = BPM(characteristic).percents else { return }
             subject.slowNotifications.onNext(String(percents))
-            print("[BEDDR][parsing slowNotifications]  \(String(percents))")
+//            print("[BEDDR][parsing slowNotifications]  \(String(percents))")
             
         case Uuid.battery:
             subject.battery.onNext(Battery(characteristic: characteristic).description)
