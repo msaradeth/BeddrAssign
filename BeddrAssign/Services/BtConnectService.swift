@@ -21,6 +21,7 @@ class BtConnectService: BluetoothManager {
             btService.connect(peripheral: peripheral)
             btService.subject.btStatus.asObservable()
                 .skip(1)
+                .delay(0.5, scheduler: MainScheduler.instance)    //Add delay 0.5 of a second to get characteristics
                 .subscribe(onNext: { (btStatus) in
                     observer.onNext(btStatus)
                     observer.onCompleted()

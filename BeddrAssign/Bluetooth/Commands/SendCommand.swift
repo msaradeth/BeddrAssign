@@ -87,6 +87,17 @@ class SendCommand: CommandService {
 
 
 
+
+//        //Handle retry or command timed out
+//        DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
+//            sendCommand.decrementNumberOfAttempt()
+//            if sendCommand.doRetry() {
+//                self.write(sendCommand: sendCommand)
+//            }else if sendCommand.timedout() {
+//                sendCommand.emitEvent(cmdStatus: .timedout)
+//            }
+//        }
+
 //
 //    func sendCommands() {
 //        guard commands.count > 0 else { return }

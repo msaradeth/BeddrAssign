@@ -71,23 +71,12 @@ extension BluetoothManager: BluetoothService {
         guard let peripheralInstance = self.peripheralInstance,
             let characteristic = sendCommand.characteristic,
             peripheralInstance.state == .connected else {
-//                sendCommand.emitEvent(cmdStatus: .failed)
                 return
         }
         self.sendCommand = sendCommand
         print("writing characteristic: \(characteristic.uuid)  dataString: \(sendCommand.dataToString)")
         peripheralInstance.writeValue(sendCommand.data, for: characteristic, type: CBCharacteristicWriteType.withResponse)
-        
-        
-//        //Handle retry or command timed out
-//        DispatchQueue.main.asyncAfter(deadline: .now() + sendCommand.numberOfSeconds) {
-//            sendCommand.decrementNumberOfAttempt()
-//            if sendCommand.doRetry() {
-//                self.write(sendCommand: sendCommand)
-//            }else if sendCommand.timedout() {
-//                sendCommand.emitEvent(cmdStatus: .timedout)
-//            }
-//        }
+
     }
     
     func scanForPeripherals() {
@@ -169,8 +158,6 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         btStatus = .failToConnect
     }
-
-
 }
 
 
@@ -194,13 +181,6 @@ extension BluetoothManager: CBPeripheralDelegate {
             if characteristic.uuid == Uuid.uniqueName {
                 peripheral.readValue(for: characteristic)   //Read uniqueName to display on first screen
             }
-//            if characteristic.properties.contains(.read) && characteristic.uuid != Uuid.realtimeClock {
-//                peripheral.readValue(for: characteristic)
-//            }
-//            if characteristic.properties.contains(.notify) {
-//                peripheral.setNotifyValue(true, for: characteristic)
-//            }
-            
             btCharacteristic.updateDiscoverCharacteristic(characteristic: characteristic)
             print("didDiscoverCharacteristicsFor characteristic:  \(characteristic)")
         }
@@ -225,4 +205,13 @@ extension BluetoothManager: CBPeripheralDelegate {
 
 
 
+
+
+
+//            if characteristic.properties.contains(.read) && characteristic.uuid != Uuid.realtimeClock {
+//                peripheral.readValue(for: characteristic)
+//            }
+//            if characteristic.properties.contains(.notify) {
+//                peripheral.setNotifyValue(true, for: characteristic)
+//            }
 

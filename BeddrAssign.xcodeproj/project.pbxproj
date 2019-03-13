@@ -174,10 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
-				5EFA37442234DE2300154BE8 /* BluetoothService.swift */,
 				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
 				5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */,
-				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
 				5E3FE20F22342FBB00B2537F /* Enum+Core.swift */,
 				5E3CB11A223701C000B3DC2C /* Commands */,
 				5E21A9C922357C910088A478 /* ParseSleepTuner */,
@@ -188,6 +186,8 @@
 		5E328FA52238A78D00C93FBF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5EFA37442234DE2300154BE8 /* BluetoothService.swift */,
+				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
 				5E328FA62238A91100C93FBF /* DeviceService.swift */,
 			);
 			path = Services;

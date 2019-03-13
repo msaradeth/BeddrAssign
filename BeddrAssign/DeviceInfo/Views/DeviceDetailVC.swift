@@ -39,11 +39,10 @@ class DeviceDetailVC: UIViewController {
         // Bind data to views
         setupRx()
         
-        //Read Values
-        DispatchQueue.main.async {
-            self.viewModel.readDeviceValues()
-        }
+        //Read Device Values
+        viewModel.readDeviceValues()
     }
+    
     
     // Bind data to views
     func setupRx() {

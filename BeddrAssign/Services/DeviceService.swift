@@ -23,11 +23,13 @@ class DeviceService {
         
     // Read values for selected characteristics
     func readValues() {
+        guard let peripheral = tunDevice.peripheral else { return }
         var characteristics = [CBCharacteristic]()
         if let characteristic = btCharacteristic?.uniqueId { characteristics.append(characteristic) }
         if let characteristic = btCharacteristic?.info { characteristics.append(characteristic) }
         for characteristic in characteristics {
-            tunDevice.peripheral?.readValue(for: characteristic)
+            print(characteristic)
+            peripheral.readValue(for: characteristic)
         }
     }
     
