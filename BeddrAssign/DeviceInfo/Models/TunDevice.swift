@@ -1,5 +1,5 @@
 //
-//  DeviceInfo.swift
+//  TunDevice.swift
 //  Assignment
 //
 //  Created by Mike Saradeth on 3/8/19.
@@ -10,7 +10,7 @@ import Foundation
 import CoreBluetooth
 
 // Contains device discovered
-struct DeviceInfo {
+struct TunDevice {
     var name:String
     var uuidString: String {
         return peripheral?.identifier.uuidString ?? ""

@@ -16,7 +16,7 @@ import CoreBluetooth
 struct BtCharacteristic {
     var uniqueName: CBCharacteristic?
     var battery: CBCharacteristic?
-    var deviceInfo: CBCharacteristic?
+    var info: CBCharacteristic?
     var uniqueId: CBCharacteristic?
     var slowNotifications: CBCharacteristic?
     
@@ -27,7 +27,7 @@ struct BtCharacteristic {
         case Uuid.battery:
             battery = characteristic
         case Uuid.info:
-            deviceInfo = characteristic
+            info = characteristic
         case Uuid.uniqueId:
             uniqueId = characteristic
         case Uuid.slowNotifications:

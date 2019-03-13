@@ -33,19 +33,19 @@ protocol BluetoothService {
 // Own by BluetoothService protocol  
 struct BluetoothSubject {
     var btStatus: BehaviorSubject<BtStatus>
-    var devices: BehaviorSubject<[DeviceInfo]>
+    var devices: BehaviorSubject<[TunDevice]>
     var uniqueName: BehaviorSubject<String>
     var battery: BehaviorSubject<String>
-    var deviceInfo: BehaviorSubject<String>
+    var tunDevice: BehaviorSubject<String>
     var slowNotifications: BehaviorSubject<String>
     var uniqueId: BehaviorSubject<String>
     
     init() {
         btStatus = BehaviorSubject<BtStatus>(value: .unknown)
-        devices = BehaviorSubject<[DeviceInfo]>(value: [])
+        devices = BehaviorSubject<[TunDevice]>(value: [])
         uniqueName = BehaviorSubject<String>(value: "")
         battery = BehaviorSubject<String>(value: "")
-        deviceInfo = BehaviorSubject<String>(value: "")
+        tunDevice = BehaviorSubject<String>(value: "")
         slowNotifications = BehaviorSubject<String>(value: "")
         uniqueId = BehaviorSubject<String>(value: "")
     }

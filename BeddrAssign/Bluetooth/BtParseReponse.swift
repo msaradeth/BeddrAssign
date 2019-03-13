@@ -47,7 +47,7 @@ class BtParseReponse {
             subject.battery.onNext(Battery(characteristic: characteristic).description)
             
         case Uuid.info:
-            subject.deviceInfo.onNext(Version(characteristic).fwString)
+            subject.tunDevice.onNext(Version(characteristic).fwString)
             print("[BEDDR][parsing fwString]")
             
         default:

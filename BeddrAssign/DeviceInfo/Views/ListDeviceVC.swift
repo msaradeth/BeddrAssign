@@ -54,17 +54,18 @@ class ListDeviceVC: UIViewController {
         
         // Handle item selection
         tableView.rx
-            .modelSelected(DeviceInfo.self)
-            .subscribe(onNext: { [weak self] deviceInfo in
+            .modelSelected(TunDevice.self)
+            .subscribe(onNext: { [weak self] tunDevice in
                 guard let this = self else { return }
                 let indexPath = this.tableView.indexPathForSelectedRow
                 this.tableView.deselectRow(at: indexPath!, animated: true)
                 
                 //Request bluetooth connection, if successful, go to detail screen after connected
-                this.viewModel.connect(peripheral: deviceInfo.peripheral, completion: { (btStatus) in
+                this.viewModel.connect(peripheral: tunDevice.peripheral, completion: { (btStatus) in
                     if btStatus == .connected {
                         //Injected objects needed for detail screen
-                        let detailViewModel = DetailViewModel(btService: this.viewModel.btService, deviceInfo: deviceInfo)
+                        let deviceService = DeviceService(btCharacteristic: this.viewModel.btCharacteristic, tunDevice: tunDevice)
+                        let detailViewModel = DetailViewModel(btService: this.viewModel.btService, deviceService: deviceService)
                         let deviceDetailVC = DeviceDetailVC.createWith(title: "Device Detail", viewModel: detailViewModel)
                         this.navigationController?.pushViewController(deviceDetailVC, animated: true)
                     }

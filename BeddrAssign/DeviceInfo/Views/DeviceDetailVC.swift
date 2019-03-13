@@ -41,7 +41,7 @@ class DeviceDetailVC: UIViewController {
         
         //Read Values
         DispatchQueue.main.async {
-            self.viewModel.readValues()
+            self.viewModel.readDeviceValues()
         }
     }
     
@@ -57,7 +57,7 @@ class DeviceDetailVC: UIViewController {
             .bind(to: deviceIdLabel.rx.text)
             .disposed(by: disposeBag)
         
-        subject.deviceInfo.asObservable()
+        subject.tunDevice.asObservable()
             .bind(to: deviceInfo.rx.text)
             .disposed(by: disposeBag)
 

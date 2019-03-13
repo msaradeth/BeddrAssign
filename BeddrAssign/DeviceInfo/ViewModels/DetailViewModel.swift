@@ -17,39 +17,30 @@ import CoreBluetooth
 class DetailViewModel {
     let bag = DisposeBag()
     var btService: BluetoothService?
+    var deviceService: DeviceService
     var subject: BluetoothSubject? {
         return btService?.subject
     }
     var btCharacteristic: BtCharacteristic? {
         return btService?.btCharacteristic
     }
-    var deviceInfo: DeviceInfo
+        
     
-    init(btService: BluetoothService?, deviceInfo: DeviceInfo) {
+    init(btService: BluetoothService?, deviceService: DeviceService) {
         self.btService = btService
-        self.deviceInfo = deviceInfo
+        self.deviceService = deviceService
     }
     
     // Read values for selected characteristics
-    func readValues() {
-        var characteristics = [CBCharacteristic]()
-        if let characteristic = btCharacteristic?.uniqueId { characteristics.append(characteristic) }
-        if let characteristic = btCharacteristic?.deviceInfo { characteristics.append(characteristic) }
-        for characteristic in characteristics {
-            deviceInfo.peripheral?.readValue(for: characteristic)
-        }
+    func readDeviceValues() {
+        deviceService.readValues()
     }
-    
     
     // Toggles notification
     func toggleNotification(characteristic: CBCharacteristic?)  {
-        guard let characteristic = characteristic else { return }
-        if characteristic.isNotifying {
-            deviceInfo.peripheral?.setNotifyValue(false, for: characteristic)
-        }else {
-            deviceInfo.peripheral?.setNotifyValue(true, for: characteristic)
-        }
+        deviceService.toggleNotification(characteristic: characteristic)
     }
+
   
     deinit {
         print("DetailViewModel deinit")

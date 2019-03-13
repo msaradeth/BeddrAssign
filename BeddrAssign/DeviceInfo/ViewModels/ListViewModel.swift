@@ -16,8 +16,11 @@ import CoreBluetooth
 
 class ListViewModel {
     fileprivate let disposeBag = DisposeBag()
-    var subjectDevices: BehaviorSubject<[DeviceInfo]>
+    var subjectDevices: BehaviorSubject<[TunDevice]>
     var btService: BluetoothService?
+    var btCharacteristic: BtCharacteristic? {
+        return btService?.btCharacteristic
+    }
     var btConnectService: BtConnectService
     
     init(btService: BluetoothService, btConnectService: BtConnectService) {

@@ -24,7 +24,7 @@ class BluetoothManager: NSObject {
             subject.btStatus.onNext(btStatus)
         }
     }
-    public var devices: [DeviceInfo] {
+    public var devices: [TunDevice] {
         didSet {
             subject.devices.onNext(devices)
         }
@@ -142,7 +142,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
         //If is Sleep Tuner and not in devices list, add it to the list
 //        if peripheralName == "SleepTun" {
         if !devices.contains(where: { $0.peripheral!.identifier == peripheral.identifier}) {
-            let deviceHeader = DeviceInfo(name: peripheralName, peripheral: peripheral)
+            let deviceHeader = TunDevice(name: peripheralName, peripheral: peripheral)
             print("didDiscover peripheral:  \(peripheral.name!)  \(peripheral.identifier.uuidString)")
             devices.append(deviceHeader)
         }
@@ -208,7 +208,7 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.deviceInfo || characteristic.uuid == btCharacteristic.uniqueId {
+        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.info || characteristic.uuid == btCharacteristic.uniqueId {
             NSLog("didWriteValueFors characteristice uuid: \(String(describing: characteristic.uuid))")
         }
     }
@@ -216,7 +216,7 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     // MARK: Handle Bluetooth Reponses
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.deviceInfo || characteristic.uuid == btCharacteristic.uniqueId {
+        if characteristic.uuid == btCharacteristic.uniqueName || characteristic.uuid == btCharacteristic.info || characteristic.uuid == btCharacteristic.uniqueId {
             NSLog("didUpdateValueFor characteristice uuid: \(String(describing: characteristic.uuid))")
         }
         btParseReponse.updateValueForCharacteristic(characteristic: characteristic)

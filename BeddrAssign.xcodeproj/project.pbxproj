@@ -23,6 +23,7 @@
 		5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9D822357C910088A478 /* BloodOxygen.swift */; };
 		5E21A9EB223580460088A478 /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9EA223580460088A478 /* Data+Ext.swift */; };
 		5E21A9ED223580960088A478 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21A9EC223580960088A478 /* String+Ext.swift */; };
+		5E328FA72238A91100C93FBF /* DeviceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E328FA62238A91100C93FBF /* DeviceService.swift */; };
 		5E3FE1BD22340E3A00B2537F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */; };
 		5E3FE1C422340E3C00B2537F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C322340E3C00B2537F /* Assets.xcassets */; };
 		5E3FE1C722340E3C00B2537F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1C522340E3C00B2537F /* LaunchScreen.storyboard */; };
@@ -30,7 +31,7 @@
 		5E3FE1DD22340E3C00B2537F /* BeddrAssignUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1DC22340E3C00B2537F /* BeddrAssignUITests.swift */; };
 		5E3FE1EF22340F9800B2537F /* MainNavCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1EE22340F9800B2537F /* MainNavCntrl.swift */; };
 		5E3FE201223415BB00B2537F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1F8223415BA00B2537F /* ListViewModel.swift */; };
-		5E3FE203223415BB00B2537F /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */; };
+		5E3FE203223415BB00B2537F /* TunDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FB223415BA00B2537F /* TunDevice.swift */; };
 		5E3FE204223415BB00B2537F /* BeddrDevices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FD223415BA00B2537F /* BeddrDevices.storyboard */; };
 		5E3FE206223415BB00B2537F /* ListDeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */; };
 		5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */; };
@@ -81,6 +82,7 @@
 		5E21A9D822357C910088A478 /* BloodOxygen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BloodOxygen.swift; sourceTree = "<group>"; };
 		5E21A9EA223580460088A478 /* Data+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		5E21A9EC223580960088A478 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		5E328FA62238A91100C93FBF /* DeviceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceService.swift; sourceTree = "<group>"; };
 		5E3FE1B922340E3A00B2537F /* BeddrAssign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeddrAssign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3FE1BC22340E3A00B2537F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E3FE1C322340E3C00B2537F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,7 +96,7 @@
 		5E3FE1DE22340E3C00B2537F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E3FE1EE22340F9800B2537F /* MainNavCntrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavCntrl.swift; sourceTree = "<group>"; };
 		5E3FE1F8223415BA00B2537F /* ListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
-		5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		5E3FE1FB223415BA00B2537F /* TunDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunDevice.swift; sourceTree = "<group>"; };
 		5E3FE1FD223415BA00B2537F /* BeddrDevices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeddrDevices.storyboard; sourceTree = "<group>"; };
 		5E3FE1FF223415BA00B2537F /* ListDeviceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDeviceVC.swift; sourceTree = "<group>"; };
 		5E3FE20822341A4F00B2537F /* UIStoryboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Ext.swift"; sourceTree = "<group>"; };
@@ -171,24 +173,24 @@
 		5E21A9EE223582B70088A478 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				5E3CB119223701A900B3DC2C /* Core */,
-				5E3CB11A223701C000B3DC2C /* Commands */,
-				5E21A9C922357C910088A478 /* ParseSleepTuner */,
-			);
-			path = Bluetooth;
-			sourceTree = "<group>";
-		};
-		5E3CB119223701A900B3DC2C /* Core */ = {
-			isa = PBXGroup;
-			children = (
 				5E3FE20A2234235700B2537F /* BluetoothManager.swift */,
 				5EFA37442234DE2300154BE8 /* BluetoothService.swift */,
 				5EFA280D22358DF50031F273 /* BtParseReponse.swift */,
 				5EFA280F2235C8B90031F273 /* BtCharacteristic.swift */,
 				5EFA37412234DC2300154BE8 /* BtConnectService.swift */,
 				5E3FE20F22342FBB00B2537F /* Enum+Core.swift */,
+				5E3CB11A223701C000B3DC2C /* Commands */,
+				5E21A9C922357C910088A478 /* ParseSleepTuner */,
 			);
-			path = Core;
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		5E328FA52238A78D00C93FBF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5E328FA62238A91100C93FBF /* DeviceService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		5E3CB11A223701C000B3DC2C /* Commands */ = {
@@ -227,6 +229,7 @@
 				5E3FE1EB22340EE200B2537F /* Application */,
 				5E3FE1F5223415BA00B2537F /* DeviceInfo */,
 				5E21A9EE223582B70088A478 /* Bluetooth */,
+				5E328FA52238A78D00C93FBF /* Services */,
 				5E3FE20722341A1E00B2537F /* Extentions */,
 				5E3FE1C322340E3C00B2537F /* Assets.xcassets */,
 				5E3FE1C822340E3C00B2537F /* Info.plist */,
@@ -284,7 +287,7 @@
 		5E3FE1F9223415BA00B2537F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5E3FE1FB223415BA00B2537F /* DeviceInfo.swift */,
+				5E3FE1FB223415BA00B2537F /* TunDevice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -500,7 +503,7 @@
 				5E21A9E022357C910088A478 /* Uuid.swift in Sources */,
 				5E3FE201223415BB00B2537F /* ListViewModel.swift in Sources */,
 				5EFA37422234DC2300154BE8 /* BtConnectService.swift in Sources */,
-				5E3FE203223415BB00B2537F /* DeviceInfo.swift in Sources */,
+				5E3FE203223415BB00B2537F /* TunDevice.swift in Sources */,
 				5EFA280E22358DF50031F273 /* BtParseReponse.swift in Sources */,
 				5E21A9E722357C910088A478 /* BloodOxygen.swift in Sources */,
 				5E21A9E322357C910088A478 /* BPM.swift in Sources */,
@@ -523,6 +526,7 @@
 				5E3FE20922341A4F00B2537F /* UIStoryboard+Ext.swift in Sources */,
 				5EE4EA4E223708FD00784DAF /* Int+Ext.swift in Sources */,
 				5E3FE1EF22340F9800B2537F /* MainNavCntrl.swift in Sources */,
+				5E328FA72238A91100C93FBF /* DeviceService.swift in Sources */,
 				5EFD0E0122374FA00054A38A /* SendCommand.swift in Sources */,
 				5E21A9DF22357C910088A478 /* UniqueID.swift in Sources */,
 				5EFD0E0522377D120054A38A /* UUID.swift in Sources */,
@@ -695,7 +699,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LP46D328FV;
+				DEVELOPMENT_TEAM = QAJNW7456U;
 				INFOPLIST_FILE = BeddrAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -715,7 +719,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LP46D328FV;
+				DEVELOPMENT_TEAM = QAJNW7456U;
 				INFOPLIST_FILE = BeddrAssign/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
