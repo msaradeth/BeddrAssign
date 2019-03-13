@@ -227,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				5E3FE1EB22340EE200B2537F /* Application */,
-				5E3FE1F5223415BA00B2537F /* DeviceInfo */,
+				5E3FE1F5223415BA00B2537F /* TunerDevice */,
 				5E21A9EE223582B70088A478 /* Bluetooth */,
 				5E328FA52238A78D00C93FBF /* Services */,
 				5E3FE20722341A1E00B2537F /* Extentions */,
@@ -265,14 +265,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		5E3FE1F5223415BA00B2537F /* DeviceInfo */ = {
+		5E3FE1F5223415BA00B2537F /* TunerDevice */ = {
 			isa = PBXGroup;
 			children = (
 				5E3FE1F9223415BA00B2537F /* Models */,
 				5E3FE1FC223415BA00B2537F /* Views */,
 				5E3FE1F6223415BA00B2537F /* ViewModels */,
 			);
-			path = DeviceInfo;
+			path = TunerDevice;
 			sourceTree = "<group>";
 		};
 		5E3FE1F6223415BA00B2537F /* ViewModels */ = {
